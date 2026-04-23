@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kerala Trip · Apr 24–29</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & BASE ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green-900: #0d3320;
+  --green-800: #155235;
+  --green-700: #1a6b42;
+  --green-600: #219653;
+  --green-400: #3bbf74;
+  --green-100: #d6f5e5;
+  --green-50:  #f0fbf5;
+
+  --teal-700: #0f5f5f;
+  --teal-400: #2ab8b8;
+
+  --amber-600: #c47a1e;
+  --amber-100: #fef3d6;
+  --amber-50:  #fffbf0;
+
+  --gold: #d4a017;
+
+  --navy: #1a2540;
+  --slate-700: #364152;
+  --slate-500: #5a6a7e;
+  --slate-400: #7a8fa8;
+  --slate-200: #d8e3ef;
+  --slate-100: #eef3f9;
+  --slate-50:  #f7f9fc;
+
+  --white: #ffffff;
+  --ink:   #111827;
+
+  /* map to component tokens */
+  --color-text-primary:    var(--ink);
+  --color-text-secondary:  var(--slate-500);
+  --color-text-tertiary:   var(--slate-400);
+  --color-background-primary:   var(--white);
+  --color-background-secondary: var(--slate-50);
+  --color-border-tertiary: var(--slate-200);
+  --color-border-secondary: #c5d3e0;
+  --border-radius-lg: 14px;
+  --border-radius-md: 9px;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --shadow-sm:  0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --shadow-md:  0 4px 14px rgba(0,0,0,.08), 0 1px 4px rgba(0,0,0,.04);
+  --shadow-lg:  0 10px 32px rgba(0,0,0,.10), 0 2px 8px rgba(0,0,0,.05);
+  --shadow-card: 0 2px 8px rgba(26,37,64,.06), 0 0 0 1px rgba(26,37,64,.06);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans);
+  background: #f0f4f0;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(26,107,66,.12) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 100% 80%, rgba(26,136,209,.07) 0%, transparent 60%);
+  min-height: 100vh;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── HERO ─────────────────────────────────────────────────── */
+.hero {
+  background: linear-gradient(135deg, var(--green-900) 0%, var(--green-800) 40%, var(--teal-700) 100%);
+  padding: 28px 20px 36px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 70% 120% at 90% 60%, rgba(42,184,184,.18) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 80% at -10% 40%, rgba(212,160,23,.12) 0%, transparent 55%);
+  pointer-events: none;
+}
+.hero-palms {
+  position: absolute; right: -10px; bottom: -4px;
+  font-size: 80px; opacity: .07; line-height: 1;
+  user-select: none; pointer-events: none;
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2);
+  color: rgba(255,255,255,.85); font-size: 11px; font-weight: 500;
+  letter-spacing: .06em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 20px; margin-bottom: 12px;
+  backdrop-filter: blur(6px);
+}
+.hero-tag::before { content: '🌴'; font-size: 13px; }
+.hero h1 {
+  color: #fff; font-size: 26px; font-weight: 700; line-height: 1.15;
+  letter-spacing: -.4px; margin-bottom: 6px;
+}
+.hero-sub {
+  color: rgba(255,255,255,.65); font-size: 13px; font-weight: 400;
+  margin-bottom: 20px;
+}
+.hero-chips {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.chip {
+  background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.18);
+  color: rgba(255,255,255,.9); font-size: 12px; font-weight: 500;
+  padding: 5px 11px; border-radius: 20px;
+  backdrop-filter: blur(4px);
+  display: flex; align-items: center; gap: 5px;
+}
+.chip-icon { font-size: 14px; }
+
+/* ── WRAPPER ──────────────────────────────────────────────── */
+.app-wrap {
+  max-width: 700px; margin: 0 auto;
+  padding: 0 0 40px;
+}
+
+/* ── TABS ─────────────────────────────────────────────────── */
+.tab-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(240,244,240,.92);
+  backdrop-filter: blur(12px) saturate(1.4);
+  border-bottom: 1px solid rgba(26,107,66,.14);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+}
+.tabs {
+  display: flex; overflow-x: auto; gap: 0;
+  padding: 0 16px;
+  scrollbar-width: none;
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  padding: 13px 14px; font-size: 13px; font-weight: 500;
+  color: var(--slate-500); cursor: pointer;
+  border-bottom: 2.5px solid transparent;
+  margin-bottom: -1px; white-space: nowrap; flex-shrink: 0;
+  transition: color .2s, border-color .2s;
+  letter-spacing: -.01em;
+}
+.tab:hover { color: var(--green-700); }
+.tab.on {
+  color: var(--green-700); font-weight: 600;
+  border-bottom-color: var(--green-600);
+}
+.pane { display: none; }
+.pane.on { display: block; animation: fadeIn .22s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── CONTENT AREA ─────────────────────────────────────────── */
+.content { padding: 20px 16px 0; }
+
+/* ── STATS GRID ───────────────────────────────────────────── */
+.stat-g {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 10px; margin-bottom: 16px;
+}
+@media (min-width: 480px) { .stat-g { grid-template-columns: repeat(4, 1fr); } }
+.stat {
+  background: var(--white);
+  border-radius: var(--border-radius-lg);
+  padding: 14px 14px 12px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(26,107,66,.08);
+  transition: box-shadow .2s, transform .2s;
+}
+.stat:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
+.stat-l { font-size: 10px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--slate-400); margin-bottom: 5px; }
+.stat-v { font-size: 18px; font-weight: 700; color: var(--ink); letter-spacing: -.5px; }
+.stat-s { font-size: 10px; color: var(--slate-400); margin-top: 3px; }
+
+/* ── CARDS ────────────────────────────────────────────────── */
+.card {
+  background: var(--white);
+  border: 1px solid rgba(26,107,66,.09);
+  border-radius: var(--border-radius-lg);
+  padding: 18px; margin-bottom: 12px;
+  box-shadow: var(--shadow-card);
+  transition: box-shadow .2s;
+}
+.card:hover { box-shadow: var(--shadow-md); }
+.card-title {
+  font-size: 14px; font-weight: 600; color: var(--ink);
+  margin-bottom: 13px; letter-spacing: -.2px;
+}
+
+/* ── ROWS ─────────────────────────────────────────────────── */
+.row {
+  display: flex; gap: 10px; padding: 7px 0;
+  border-bottom: 1px solid var(--slate-100);
+  align-items: flex-start; font-size: 12.5px;
+}
+.row:last-child { border-bottom: none; }
+.lbl { color: var(--slate-400); min-width: 90px; flex-shrink: 0; font-size: 12px; padding-top: 1px; }
+.val { color: var(--ink); font-weight: 500; flex: 1; line-height: 1.5; }
+.sub { font-size: 11px; color: var(--slate-500); margin-top: 2px; line-height: 1.5; }
+
+/* ── BADGES ───────────────────────────────────────────────── */
+.bdg {
+  display: inline-flex; align-items: center;
+  font-size: 10.5px; font-weight: 600;
+  padding: 2.5px 9px; border-radius: 20px;
+  margin-top: 3px; letter-spacing: .01em;
+}
+.g { background: #e0f5eb; color: #166534; }
+.b { background: #dbeafe; color: #1d4ed8; }
+.a { background: #fef3c7; color: #92400e; }
+.t { background: #ccfbf1; color: #0f5a4b; }
+.p { background: #fce7f3; color: #9d174d; }
+.v { background: #ede9fe; color: #5b21b6; }
+
+/* ── SECTION HEADERS ──────────────────────────────────────── */
+.sec { margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--slate-100); }
+.sec:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.sec-h {
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .08em; color: var(--slate-400); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.sec-h::after { content: ''; flex: 1; height: 1px; background: var(--slate-100); }
+
+/* ── TIME ROWS ────────────────────────────────────────────── */
+.t-row {
+  display: flex; gap: 12px; padding: 7px 0;
+  border-bottom: 1px solid var(--slate-50);
+  align-items: flex-start;
+}
+.t-row:last-child { border-bottom: none; }
+.t-time {
+  font-size: 10.5px; color: var(--slate-400); min-width: 62px;
+  padding-top: 2px; font-weight: 500; font-variant-numeric: tabular-nums;
+}
+.t-text { font-size: 12.5px; color: var(--ink); font-weight: 500; }
+.t-note { font-size: 11.5px; color: var(--slate-500); margin-top: 2px; line-height: 1.55; }
+
+/* ── INFO BOX ─────────────────────────────────────────────── */
+.infobox {
+  background: linear-gradient(135deg, var(--green-50), var(--slate-50));
+  border: 1px solid rgba(26,107,66,.1);
+  border-radius: var(--border-radius-md);
+  padding: 12px 14px; margin-top: 10px;
+}
+.infobox .r {
+  display: flex; justify-content: space-between;
+  font-size: 11.5px; padding: 3px 0;
+}
+.infobox .r .k { color: var(--slate-500); }
+.infobox .r .v { font-weight: 600; color: var(--ink); }
+
+/* ── NOTE BOX ─────────────────────────────────────────────── */
+.note-box {
+  background: linear-gradient(135deg, var(--amber-50), #fff8ed);
+  border: 1px solid rgba(196,122,30,.15);
+  border-left: 3px solid var(--amber-600);
+  border-radius: var(--border-radius-md);
+  padding: 12px 14px; font-size: 12px;
+  color: var(--slate-500); line-height: 1.65; margin-top: 12px;
+}
+
+/* ── TIMELINE ─────────────────────────────────────────────── */
+.tl-wrap { padding-left: 30px; position: relative; }
+.tl-line {
+  position: absolute; left: 11px; top: 6px; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--green-600), var(--teal-400), var(--slate-200));
+  border-radius: 2px;
+}
+.tl-item { position: relative; margin-bottom: 14px; }
+.tl-dot {
+  position: absolute; left: -23px; top: 6px;
+  width: 12px; height: 12px; border-radius: 50%;
+  border: 2.5px solid var(--white);
+  box-shadow: 0 0 0 2px rgba(0,0,0,.08);
+}
+.tl-box {
+  background: var(--white);
+  border: 1px solid rgba(26,107,66,.09);
+  border-radius: var(--border-radius-lg);
+  padding: 13px 15px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow .2s, transform .2s;
+}
+.tl-box:hover { box-shadow: var(--shadow-md); transform: translateX(2px); }
+.tl-box.hl {
+  border-left-width: 3px;
+  border-radius: 0 var(--border-radius-lg) var(--border-radius-lg) 0;
+}
+.tl-d { font-size: 10.5px; color: var(--slate-400); margin-bottom: 3px; font-weight: 500; letter-spacing: .02em; }
+.tl-t { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+.tl-s { font-size: 11.5px; color: var(--slate-500); line-height: 1.55; }
+.tl-m {
+  display: flex; gap: 14px; margin-top: 7px;
+  font-size: 11px; flex-wrap: wrap;
+}
+.tl-m .k { color: var(--slate-500); }
+.tl-m .k span { font-weight: 600; color: var(--ink); }
+
+/* ── EXPENSE GRID ─────────────────────────────────────────── */
+.exp-g {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px; margin-bottom: 14px;
+}
+.exp-c {
+  background: var(--white);
+  border: 1px solid rgba(26,107,66,.09);
+  border-radius: var(--border-radius-lg);
+  padding: 13px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow .2s;
+}
+.exp-c:hover { box-shadow: var(--shadow-md); }
+.exp-l {
+  font-size: 11px; color: var(--slate-500);
+  margin-bottom: 7px; font-weight: 600;
+  letter-spacing: -.01em;
+}
+.exp-inp { display: flex; align-items: center; gap: 5px; margin-bottom: 5px; }
+.exp-inp input {
+  flex: 1; padding: 7px 9px;
+  border: 1.5px solid var(--slate-200);
+  border-radius: var(--border-radius-md);
+  font-size: 12.5px;
+  background: var(--slate-50);
+  color: var(--ink);
+  width: 100%; min-width: 0;
+  font-family: var(--font-sans);
+  transition: border-color .15s, box-shadow .15s;
+  -webkit-appearance: none; appearance: none;
+}
+.exp-inp input:focus {
+  outline: none; border-color: var(--green-600);
+  box-shadow: 0 0 0 3px rgba(33,150,83,.12);
+  background: var(--white);
+}
+.exp-amt { font-size: 17px; font-weight: 700; color: var(--ink); letter-spacing: -.5px; }
+.exp-sub { font-size: 10.5px; color: var(--slate-400); margin-top: 2px; }
+
+/* ── TOTALS BOX ───────────────────────────────────────────── */
+.total-box {
+  background: var(--white);
+  border: 1px solid rgba(26,107,66,.12);
+  border-radius: var(--border-radius-lg);
+  padding: 20px; margin-bottom: 12px;
+  box-shadow: var(--shadow-md);
+  position: relative; overflow: hidden;
+}
+.total-box::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--green-600), var(--teal-400), var(--gold));
+}
+.total-nums { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.total-num .l {
+  font-size: 10px; font-weight: 700; color: var(--slate-400);
+  text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px;
+}
+.total-num .n {
+  font-size: 28px; font-weight: 700; color: var(--ink);
+  letter-spacing: -1px; line-height: 1;
+}
+.bdg-row {
+  display: flex; gap: 8px; align-items: center;
+  padding: 6px 0; border-bottom: 1px solid var(--slate-50); font-size: 12px;
+}
+.bdg-row:last-child { border-bottom: none; }
+.bdg-row .k { flex: 1; color: var(--slate-500); }
+.bdg-row .v { font-weight: 600; color: var(--ink); }
+
+/* ── KM TOTAL ─────────────────────────────────────────────── */
+.km-total {
+  background: linear-gradient(135deg, var(--green-50), var(--white));
+  border: 1px solid rgba(26,107,66,.12);
+  border-radius: var(--border-radius-lg);
+  padding: 16px; margin-top: 14px;
+  box-shadow: var(--shadow-sm);
+}
+.km-row {
+  display: flex; justify-content: space-between;
+  padding: 5px 0; border-bottom: 1px solid rgba(26,107,66,.07);
+  font-size: 12.5px;
+}
+.km-row:last-child { border-bottom: none; font-weight: 700; font-size: 13px; }
+
+/* ── ROUTE PILLS ──────────────────────────────────────────── */
+.route-wrap {
+  display: flex; flex-wrap: wrap;
+  align-items: center; gap: 7px; font-size: 12px;
+}
+.route-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  display: inline-block; flex-shrink: 0;
+  box-shadow: 0 0 0 2px rgba(0,0,0,.08);
+}
+.route-city {
+  display: flex; align-items: center; gap: 5px;
+  font-weight: 500;
+}
+.route-city .nights {
+  font-size: 10px; color: var(--slate-400);
+  font-weight: 400;
+}
+.route-arrow { color: var(--slate-300); font-size: 13px; }
+
+/* ── SCROLL PADDING ───────────────────────────────────────── */
+.pane.on .content { padding-top: 20px; }
+</style>
+</head>
+<body>
+<div class="app-wrap">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-palms">🌴🌴</div>
+  <div class="hero-tag">God's Own Country</div>
+  <h1>Kerala Road Trip</h1>
+  <div class="hero-sub">Chandigarh → Kochi → Munnar → Backwaters → Coast → Trivandrum</div>
+  <div class="hero-chips">
+    <div class="chip"><span class="chip-icon">📅</span> Apr 24 – 29, 2025</div>
+    <div class="chip"><span class="chip-icon">🗺️</span> 550 km</div>
+    <div class="chip"><span class="chip-icon">🏨</span> 5 nights</div>
+    <div class="chip"><span class="chip-icon">🚗</span> Outstation cab</div>
+  </div>
+</div>
+
+<!-- STICKY TAB BAR -->
+<div class="tab-bar">
+  <div class="tabs">
+    <div class="tab on" onclick="sw('overview',this)">Overview</div>
+    <div class="tab" onclick="sw('days',this)">Day Plans</div>
+    <div class="tab" onclick="sw('hotels',this)">Hotels</div>
+    <div class="tab" onclick="sw('travel',this)">Travel</div>
+    <div class="tab" onclick="sw('flow',this)">Flow</div>
+    <div class="tab" onclick="sw('expenses',this)">Expenses</div>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<div id="overview" class="pane on">
+<div class="content">
+  <div class="stat-g">
+    <div class="stat"><div class="stat-l">Duration</div><div class="stat-v">6 days</div><div class="stat-s">Apr 24–29</div></div>
+    <div class="stat"><div class="stat-l">Route stops</div><div class="stat-v">5 cities</div><div class="stat-s">Kochi → TRV</div></div>
+    <div class="stat"><div class="stat-l">Total km</div><div class="stat-v">~450 km</div><div class="stat-s">Intercity road</div></div>
+    <div class="stat"><div class="stat-l">Transport</div><div class="stat-v">Outstation cab</div><div class="stat-s">₹15–22k pkg</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Route</div>
+    <div class="route-wrap">
+      <div class="route-city"><span class="route-dot" style="background:#4A63E8"></span>Chandigarh ✈</div>
+      <span class="route-arrow">→</span>
+      <div class="route-city"><span class="route-dot" style="background:#4A63E8"></span>Kochi Airport</div>
+      <span class="route-arrow">→</span>
+      <div class="route-city"><span class="route-dot" style="background:#219653"></span>Munnar <span class="nights">(2 nights)</span></div>
+      <span class="route-arrow">→</span>
+      <div class="route-city"><span class="route-dot" style="background:#1a8fd1"></span>Kumarakom <span class="nights">(1 night)</span></div>
+      <span class="route-arrow">→</span>
+      <div class="route-city"><span class="route-dot" style="background:#e05c3a"></span>Varkala <span class="nights">(1 night)</span></div>
+      <span class="route-arrow">→</span>
+      <div class="route-city"><span class="route-dot" style="background:#c94caf"></span>Kovalam</div>
+      <span class="route-arrow">→</span>
+      <div class="route-city"><span class="route-dot" style="background:#7c5cbf"></span>Trivandrum <span class="nights">(1 night)</span></div>
+      <span class="route-arrow">→</span>
+      <div class="route-city"><span class="route-dot" style="background:#4A63E8"></span>TRV ✈ Chandigarh</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Quick summary per day</div>
+    <div class="row"><span class="lbl">Day 1 · Apr 24</span><span class="val">Land Kochi · Lunch Fort Kochi · Cab to Munnar (130 km)</span></div>
+    <div class="row"><span class="lbl">Day 2 · Apr 25</span><span class="val">Eravikulam NP · Mattupetty · Tea factory · Waterfalls · Top Station sunset</span></div>
+    <div class="row"><span class="lbl">Day 3 · Apr 26</span><span class="val">Checkout Munnar · Drive Kumarakom (120 km) · Backwater cruise · Karimeen dinner</span></div>
+    <div class="row"><span class="lbl">Day 4 · Apr 27</span><span class="val">Checkout Kumarakom · Drive Varkala (130 km) · Cliff walk · Sunset · Dinner</span></div>
+    <div class="row"><span class="lbl">Day 5 · Apr 28</span><span class="val">Ayurveda (opt.) · Kovalam beach (55 km) · Trivandrum · Temple · Farewell dinner</span></div>
+    <div class="row"><span class="lbl">Day 6 · Apr 29</span><span class="val">Shanghumugham sunrise · Palace museum · TRV Airport · Fly home</span></div>
+  </div>
+
+  <div class="note-box"><strong style="color:var(--color-text-primary)">Alleppey removed.</strong> Route simplified: Kumarakom backwaters give the same authentic experience without the detour. Saves half a day and reduces driving. Cleaner, more relaxed flow.</div>
+</div>
+</div>
+
+<!-- DAY PLANS -->
+<div id="days" class="pane">
+<div class="content">
+
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#dbeafe,#bfdbfe);color:#1d4ed8;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0;box-shadow:0 2px 6px rgba(29,78,216,.2)">1</div>
+      <div><div style="font-size:15px;font-weight:600;color:var(--color-text-primary);letter-spacing:-.2px">Arrival — Kochi → Munnar</div><div style="font-size:12px;color:var(--color-text-secondary);margin-top:1px">Thursday, Apr 24</div></div>
+    </div>
+    <div class="sec">
+      <div class="sec-h">Schedule</div>
+      <div class="t-row"><span class="t-time">8:00 AM</span><div><div class="t-text">Depart Chandigarh ✈</div><div class="t-note">~4 hr flight to Kochi</div></div></div>
+      <div class="t-row"><span class="t-time">~12:00 PM</span><div><div class="t-text">Land Cochin Airport (COK)</div><div class="t-note">Pick up pre-booked outstation cab. Freshen up.</div></div></div>
+      <div class="t-row"><span class="t-time">1:00 PM</span><div><div class="t-text">Lunch · Fort Kochi</div><div class="t-note">Fish curry, appam. Quick stroll — Chinese Fishing Nets (Cheena Vala), colonial streets.</div></div></div>
+      <div class="t-row"><span class="t-time">2:30 PM</span><div><div class="t-text">Depart for Munnar · 130 km</div><div class="t-note">Ghat road via Kothamangalam. Waterfalls visible from the road. ~4 hrs.</div><span class="bdg a">Cab · ₹2,000–3,200</span></div></div>
+      <div class="t-row"><span class="t-time">7:00 PM</span><div><div class="t-text">Arrive Munnar · Check-in</div><div class="t-note">Evening walk through Munnar bazaar — spices, local tea, handmade chocolates.</div></div></div>
+      <div class="t-row"><span class="t-time">8:00 PM</span><div><div class="t-text">Dinner · Rapsy Restaurant or hotel</div><div class="t-note">Kerala thali, puttu, kadala curry. Early rest — big day tomorrow.</div></div></div>
+    </div>
+    <div class="sec">
+      <div class="sec-h">Highlights</div>
+      <div style="font-size:12px;color:var(--color-text-secondary);line-height:1.6">Scenic ghat descent through rubber tree forests · Fort Kochi colonial architecture · First Kerala meal · Cool Munnar mountain air (1600m altitude)</div>
+    </div>
+    <div class="infobox">
+      <div class="r"><span class="k">Stay</span><span class="v">Munnar · 2 nights (Apr 24–26)</span></div>
+      <div class="r"><span class="k">Recommended</span><span class="v">Eastend Munnar · Blackberry Hills · Spice Tree</span></div>
+      <div class="r"><span class="k">Travel today</span><span class="v">~130 km intercity + airport</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#d6f5e5,#a7f3d0);color:#166534;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0;box-shadow:0 2px 6px rgba(22,101,52,.2)">2</div>
+      <div><div style="font-size:15px;font-weight:600;color:var(--color-text-primary);letter-spacing:-.2px">Munnar Hills — Full Day</div><div style="font-size:12px;color:var(--color-text-secondary);margin-top:1px">Friday, Apr 25</div></div>
+    </div>
+    <div class="sec">
+      <div class="sec-h">Schedule</div>
+      <div class="t-row"><span class="t-time">6:30 AM</span><div><div class="t-text">Eravikulam National Park</div><div class="t-note">Nilgiri Tahr mountain goat. Stunning high-altitude grasslands. Opens 7 AM. Book tickets online at eravikulam.org — sells out!</div><span class="bdg g">Must-do · Book ahead</span></div></div>
+      <div class="t-row"><span class="t-time">9:30 AM</span><div><div class="t-text">Mattupetty Dam + Echo Point</div><div class="t-note">Scenic reservoir surrounded by shola forest. Boating available. Echo Point 2 km ahead — shout and hear yourself back from the hills.</div></div></div>
+      <div class="t-row"><span class="t-time">11:00 AM</span><div><div class="t-text">Tea Garden Viewpoint + KDHP Factory</div><div class="t-note">Walk through endless emerald tea estates. Factory tour shows full leaf-to-cup process. Buy fresh tea directly from source.</div></div></div>
+      <div class="t-row"><span class="t-time">1:00 PM</span><div><div class="t-text">Lunch · Munnar town</div><div class="t-note">SN Restaurant or Crown Bakery. Browse spice shops, banana chips, handmade chocolate stalls.</div></div></div>
+      <div class="t-row"><span class="t-time">3:00 PM</span><div><div class="t-text">Attukal or Lakkam Waterfalls</div><div class="t-note">Tiered waterfalls through tea-covered hillsides. Refreshing and photogenic.</div></div></div>
+      <div class="t-row"><span class="t-time">5:30 PM</span><div><div class="t-text">Top Station sunset · 1700m</div><div class="t-note">Highest point in Munnar. Panoramic views of Tamil Nadu valleys. Misty clouds rolling in at sunset — unforgettable. 34 km from town, leave by 5 PM latest.</div><span class="bdg a">Sunset must</span></div></div>
+      <div class="t-row"><span class="t-time">8:00 PM</span><div><div class="t-text">Return hotel · Dinner</div><div class="t-note">Relax after the big hill day.</div></div></div>
+    </div>
+    <div class="sec">
+      <div class="sec-h">Highlights</div>
+      <div style="font-size:12px;color:var(--color-text-secondary);line-height:1.6">Endangered mountain goat · Echo Point valley resonance · Fresh-picked tea · Waterfall trek · 360° sunset from 1700m</div>
+    </div>
+    <div class="infobox">
+      <div class="r"><span class="k">Stay</span><span class="v">Munnar · Night 2</span></div>
+      <div class="r"><span class="k">Local travel</span><span class="v">~80 km sightseeing loop</span></div>
+      <div class="r"><span class="k">Est. local cab</span><span class="v">₹1,500–2,500</span></div>
+    </div>
+  </div>
+
+  <div class="card" style="border-color:rgba(15,110,86,.2)">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#ccfbf1,#99f6e4);color:#0f5a4b;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0;box-shadow:0 2px 6px rgba(15,90,75,.2)">3</div>
+      <div><div style="font-size:15px;font-weight:600;color:var(--color-text-primary);letter-spacing:-.2px">Munnar → Kumarakom Backwaters <span class="bdg t">Direct</span></div><div style="font-size:12px;color:var(--color-text-secondary);margin-top:1px">Saturday, Apr 26</div></div>
+    </div>
+    <div class="sec">
+      <div class="sec-h">Schedule</div>
+      <div class="t-row"><span class="t-time">9:30 AM</span><div><div class="t-text">Checkout Munnar · Final bazaar stroll</div><div class="t-note">Last chance to buy local tea, spices, Munnar chocolates as gifts.</div></div></div>
+      <div class="t-row"><span class="t-time">10:00 AM</span><div><div class="t-text">Depart for Kumarakom · 120 km direct</div><div class="t-note">Via Kottayam. Scenic descent through rubber plantations and rice paddy fields. ~3 hrs.</div><span class="bdg a">Cab · ₹1,800–2,800</span></div></div>
+      <div class="t-row"><span class="t-time">1:00 PM</span><div><div class="t-text">Lunch · Kottayam town</div><div class="t-note">Duck curry (tharavu curry) or beef fry with appam — famous Kottayam Syrian Christian speciality. Ask for a local restaurant, not a hotel.</div></div></div>
+      <div class="t-row"><span class="t-time">2:30 PM</span><div><div class="t-text">Arrive Kumarakom · Check-in</div><div class="t-note">Resort or waterfront houseboat. Freshen up, change into light clothes.</div></div></div>
+      <div class="t-row"><span class="t-time">4:00 PM</span><div><div class="t-text">Backwater canal cruise</div><div class="t-note">Narrow village waterways through paddy fields and coconut groves. Spot kingfishers, egrets, otters. Far more authentic than touristy Alleppey routes.</div><span class="bdg b">Must-do</span></div></div>
+      <div class="t-row"><span class="t-time">6:00 PM</span><div><div class="t-text">Sunset over Vembanad Lake</div><div class="t-note">Watch fishermen cast nets silhouetted against the orange sky. Perfect photography.</div></div></div>
+      <div class="t-row"><span class="t-time">7:30 PM</span><div><div class="t-text">Dinner · Karimeen (pearl spot fish)</div><div class="t-note">Local delicacy of Kottayam backwaters. Served with rice, coconut curries. Often cooked tableside at waterfront resorts.</div></div></div>
+    </div>
+    <div class="sec">
+      <div class="sec-h">Highlights</div>
+      <div style="font-size:12px;color:var(--color-text-secondary);line-height:1.6">Hills-to-backwaters transition in one day · Village canal authenticity · Rare birds in natural habitat · Kerala's most famous fish dish</div>
+    </div>
+    <div class="infobox">
+      <div class="r"><span class="k">Stay</span><span class="v">Kumarakom · 1 night (Apr 26–27)</span></div>
+      <div class="r"><span class="k">Recommended</span><span class="v">Kumarakom Lake Resort · Coconut Lagoon · CGH Houseboats</span></div>
+      <div class="r"><span class="k">Travel today</span><span class="v">~120 km</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#fef3c7,#fde68a);color:#92400e;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0;box-shadow:0 2px 6px rgba(146,64,14,.2)">4</div>
+      <div><div style="font-size:15px;font-weight:600;color:var(--color-text-primary);letter-spacing:-.2px">Kumarakom → Varkala Cliff</div><div style="font-size:12px;color:var(--color-text-secondary);margin-top:1px">Sunday, Apr 27</div></div>
+    </div>
+    <div class="sec">
+      <div class="sec-h">Schedule</div>
+      <div class="t-row"><span class="t-time">8:00 AM</span><div><div class="t-text">Checkout · Early breakfast at resort</div><div class="t-note">Enjoy final backwater view from the dining area. Pack up.</div></div></div>
+      <div class="t-row"><span class="t-time">8:30 AM</span><div><div class="t-text">Depart for Varkala · 130 km</div><div class="t-note">Coastal highway south through small towns. Plenty of coconut water stalls to stop at. ~3.5 hrs.</div><span class="bdg a">Cab · ₹2,500–4,000</span></div></div>
+      <div class="t-row"><span class="t-time">12:00 PM</span><div><div class="t-text">Arrive Varkala · Check-in cliff hotel</div><div class="t-note">Drop luggage. Get a cliff-view room if possible — worth every rupee.</div></div></div>
+      <div class="t-row"><span class="t-time">1:00 PM</span><div><div class="t-text">Lunch at cliff café</div><div class="t-note">Fish, pizza, Kerala curries all available. Eat with the Arabian Sea in view.</div></div></div>
+      <div class="t-row"><span class="t-time">3:00 PM</span><div><div class="t-text">Cliff walk + Papanasam Beach</div><div class="t-note">Walk narrow cliffside promenade. Browse handicrafts, yoga centres. Descend the stairs to the beach — red cliffs tower 30m above. Sacred bathing spot for pilgrims.</div></div></div>
+      <div class="t-row"><span class="t-time">5:00 PM</span><div><div class="t-text">Sunset from the cliff edge</div><div class="t-note">Arguably the best sunset view in Kerala. Arabian Sea goes pink and orange. Sit at a cliffside café with a drink and just watch.</div><span class="bdg a">Golden hour</span></div></div>
+      <div class="t-row"><span class="t-time">7:00 PM</span><div><div class="t-text">Cliff-edge dinner</div><div class="t-note">Try Café del Mar, Abba Restaurant, or Juice Shack. Fresh seafood, sound of waves below.</div></div></div>
+    </div>
+    <div class="sec">
+      <div class="sec-h">Highlights</div>
+      <div style="font-size:12px;color:var(--color-text-secondary);line-height:1.6">Kerala's only cliff beach · 30m red sedimentary cliffs · Sacred Papanasam beach · Clifftop café culture · Best sunset on the trip</div>
+    </div>
+    <div class="infobox">
+      <div class="r"><span class="k">Stay</span><span class="v">Varkala · 1 night (Apr 27–28)</span></div>
+      <div class="r"><span class="k">Recommended</span><span class="v">Clafouti Beach Resort · Sea Splendour · Zostel Varkala</span></div>
+      <div class="r"><span class="k">Travel today</span><span class="v">~130 km</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#fce7f3,#fbcfe8);color:#9d174d;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0;box-shadow:0 2px 6px rgba(157,23,77,.2)">5</div>
+      <div><div style="font-size:15px;font-weight:600;color:var(--color-text-primary);letter-spacing:-.2px">Varkala → Kovalam → Trivandrum</div><div style="font-size:12px;color:var(--color-text-secondary);margin-top:1px">Monday, Apr 28</div></div>
+    </div>
+    <div class="sec">
+      <div class="sec-h">Schedule</div>
+      <div class="t-row"><span class="t-time">9:00 AM</span><div><div class="t-text">Optional: Ayurveda massage · Varkala</div><div class="t-note">90-min traditional Kerala oil massage at cliff centre. ₹1,200–2,500. Book night before.</div><span class="bdg g">Optional</span></div></div>
+      <div class="t-row"><span class="t-time">11:00 AM</span><div><div class="t-text">Checkout · Depart for Kovalam · 55 km</div><div class="t-note">Smooth coastal drive south. ~1.5 hrs.</div><span class="bdg a">Cab · ₹1,200–2,000</span></div></div>
+      <div class="t-row"><span class="t-time">12:30 PM</span><div><div class="t-text">Kovalam Lighthouse Beach</div><div class="t-note">Three crescent bays. Swim or sunbathe. Climb the lighthouse for 360° views. Headland rocks great for photography.</div></div></div>
+      <div class="t-row"><span class="t-time">2:00 PM</span><div><div class="t-text">Lunch · Kovalam beachside</div><div class="t-note">Prawn masala, fish fry, fresh coconut. Eat at a shack on the sand.</div></div></div>
+      <div class="t-row"><span class="t-time">3:30 PM</span><div><div class="t-text">Drive Trivandrum · 16 km · 25 min</div><div class="t-note">Check into hotel near airport.</div></div></div>
+      <div class="t-row"><span class="t-time">5:30 PM</span><div><div class="t-text">Padmanabhaswamy Temple</div><div class="t-note">One of India's wealthiest, most sacred temples. Dravidian architecture, 100-ft gopuram. Hindus only · Dhoti required for men · Saree/churidar for women.</div><span class="bdg p">Heritage</span></div></div>
+      <div class="t-row"><span class="t-time">6:30 PM</span><div><div class="t-text">East Fort market walk + Padmatheertha Pond</div><div class="t-note">Shop for kasavu fabric, moirakari metalwork, local handicrafts. Watch temple gopuram reflect in the pond at dusk.</div></div></div>
+      <div class="t-row"><span class="t-time">8:00 PM</span><div><div class="t-text">Farewell dinner · Kerala Sadya</div><div class="t-note">Classic vegetarian feast on banana leaf — 20+ dishes. Villa Maya heritage bungalow or Malabar Hotel.</div><span class="bdg g">Special</span></div></div>
+    </div>
+    <div class="infobox">
+      <div class="r"><span class="k">Stay</span><span class="v">Trivandrum · 1 night (Apr 28–29)</span></div>
+      <div class="r"><span class="k">Recommended</span><span class="v">Uday Samudra · Muthoot Plaza · Villa Maya</span></div>
+      <div class="r"><span class="k">Travel today</span><span class="v">~70 km total</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#ede9fe,#ddd6fe);color:#5b21b6;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0;box-shadow:0 2px 6px rgba(91,33,182,.2)">6</div>
+      <div><div style="font-size:15px;font-weight:600;color:var(--color-text-primary);letter-spacing:-.2px">Departure · Trivandrum → TRV ✈</div><div style="font-size:12px;color:var(--color-text-secondary);margin-top:1px">Tuesday, Apr 29</div></div>
+    </div>
+    <div class="sec">
+      <div class="sec-h">Schedule</div>
+      <div class="t-row"><span class="t-time">7:00 AM</span><div><div class="t-text">Shanghumugham Beach · Sunrise walk</div><div class="t-note">Trivandrum's calmest beach. 6 km from city. Giant mermaid sculpture. Perfect peaceful farewell to Kerala.</div><span class="bdg b">Hidden gem</span></div></div>
+      <div class="t-row"><span class="t-time">8:30 AM</span><div><div class="t-text">Hotel breakfast + checkout</div><div class="t-note">Pack up. Last Kerala chai.</div></div></div>
+      <div class="t-row"><span class="t-time">9:00 AM</span><div><div class="t-text">Kuthiramalika Palace Museum</div><div class="t-note">18th-century royal palace next to Padmanabhaswamy Temple. Intricate woodcarvings, Kathakali masks, royal artefacts. Opens 8:30 AM. 45 min.</div></div></div>
+      <div class="t-row"><span class="t-time">10:00 AM</span><div><div class="t-text">Final souvenir shopping</div><div class="t-note">Last-minute gifts, tea boxes, Kerala coffee, moirakari items.</div></div></div>
+      <div class="t-row"><span class="t-time">10:30 AM</span><div><div class="t-text">Depart for TRV Airport · 6 km</div><div class="t-note">15–20 min drive. Arrive 2–3 hrs before flight. Airport is compact and efficient.</div><span class="bdg a">Cab · ₹400–900</span></div></div>
+      <div class="t-row"><span class="t-time">Afternoon</span><div><div class="t-text">Depart Trivandrum ✈ → Chandigarh</div><div class="t-note">Fly home. Kerala done.</div></div></div>
+    </div>
+    <div class="infobox">
+      <div class="r"><span class="k">Checkout</span><span class="v">Trivandrum hotel · 10:00 AM</span></div>
+      <div class="r"><span class="k">Airport</span><span class="v">TRV · 6 km from city · 20 min</span></div>
+      <div class="r"><span class="k">Travel today</span><span class="v">~20 km city + airport</span></div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- HOTELS -->
+<div id="hotels" class="pane">
+<div class="content">
+  <div class="note-box" style="margin-bottom:14px"><strong style="color:var(--color-text-primary)">5 nights · 4 hotels</strong> — Munnar 2 nights, Kumarakom 1, Varkala 1, Trivandrum 1</div>
+
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px">
+      <div><div style="font-size:15px;font-weight:600;color:var(--color-text-primary)">Hotel · Munnar</div><div style="font-size:12px;color:var(--color-text-secondary);margin-top:2px">Munnar town, Kerala · 1600m altitude</div></div>
+      <span class="bdg g">Stop 1</span>
+    </div>
+    <div class="row"><span class="lbl">Check-in</span><span class="val">Thu, Apr 24 · ~7:00 PM</span></div>
+    <div class="row"><span class="lbl">Check-out</span><span class="val">Sat, Apr 26 · ~9:30 AM</span></div>
+    <div class="row"><span class="lbl">Nights</span><span class="val">2 (Apr 24–26)</span></div>
+    <div class="row"><span class="lbl">Est. cost</span><span class="val">₹2,500–4,500/night</span></div>
+    <div class="row"><span class="lbl">Options</span><span class="val">Eastend Munnar (budget) · Blackberry Hills (mid) · Spice Tree (luxury)</span></div>
+    <div class="row"><span class="lbl">Tip</span><span class="val">Book with hill or valley view. AC optional — nights are cool. Ask for hot water confirmation.</span></div>
+    <div class="infobox">
+      <div class="r"><span class="k">Arriving from</span><span class="v">Kochi Airport · ~130 km</span></div>
+      <div class="r"><span class="k">Departing to</span><span class="v">Kumarakom · ~120 km</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px">
+      <div><div style="font-size:15px;font-weight:600;color:var(--color-text-primary)">Resort / Houseboat · Kumarakom</div><div style="font-size:12px;color:var(--color-text-secondary);margin-top:2px">Vembanad Lake, Kottayam district</div></div>
+      <span class="bdg t">Stop 2 · Updated</span>
+    </div>
+    <div class="row"><span class="lbl">Check-in</span><span class="val">Sat, Apr 26 · ~2:30 PM</span></div>
+    <div class="row"><span class="lbl">Check-out</span><span class="val">Sun, Apr 27 · ~8:00 AM</span></div>
+    <div class="row"><span class="lbl">Nights</span><span class="val">1 (Apr 26–27)</span></div>
+    <div class="row"><span class="lbl">Est. cost</span><span class="val">₹2,000–6,000/night</span></div>
+    <div class="row"><span class="lbl">Options</span><span class="val">Kumarakom Lake Resort · Coconut Lagoon (heritage) · CGH Houseboats (overnight boat)</span></div>
+    <div class="row"><span class="lbl">Tip</span><span class="val">Waterfront room or overnight houseboat — both iconic. Houseboat gives total backwater immersion.</span></div>
+    <div class="infobox">
+      <div class="r"><span class="k">Arriving from</span><span class="v">Munnar · ~120 km</span></div>
+      <div class="r"><span class="k">Departing to</span><span class="v">Varkala · ~130 km</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px">
+      <div><div style="font-size:15px;font-weight:600;color:var(--color-text-primary)">Cliff Hotel · Varkala</div><div style="font-size:12px;color:var(--color-text-secondary);margin-top:2px">North Cliff, Varkala · Thiruvananthapuram district</div></div>
+      <span class="bdg a">Stop 3</span>
+    </div>
+    <div class="row"><span class="lbl">Check-in</span><span class="val">Sun, Apr 27 · ~12:00 PM</span></div>
+    <div class="row"><span class="lbl">Check-out</span><span class="val">Mon, Apr 28 · ~9:00 AM</span></div>
+    <div class="row"><span class="lbl">Nights</span><span class="val">1 (Apr 27–28)</span></div>
+    <div class="row"><span class="lbl">Est. cost</span><span class="val">₹1,500–4,000/night</span></div>
+    <div class="row"><span class="lbl">Options</span><span class="val">Clafouti Beach Resort · Sea Splendour · Zostel Varkala (budget/social)</span></div>
+    <div class="row"><span class="lbl">Tip</span><span class="val">MUST stay on the cliff itself. Sea-facing rooms at all budgets. The atmosphere after dark is worth it.</span></div>
+    <div class="infobox">
+      <div class="r"><span class="k">Arriving from</span><span class="v">Kumarakom · ~130 km</span></div>
+      <div class="r"><span class="k">Departing to</span><span class="v">Kovalam → Trivandrum · ~70 km</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px">
+      <div><div style="font-size:15px;font-weight:600;color:var(--color-text-primary)">Hotel · Trivandrum</div><div style="font-size:12px;color:var(--color-text-secondary);margin-top:2px">Near airport / Kovalam road, Thiruvananthapuram</div></div>
+      <span class="bdg v">Stop 4</span>
+    </div>
+    <div class="row"><span class="lbl">Check-in</span><span class="val">Mon, Apr 28 · ~4:30 PM</span></div>
+    <div class="row"><span class="lbl">Check-out</span><span class="val">Tue, Apr 29 · ~10:00 AM</span></div>
+    <div class="row"><span class="lbl">Nights</span><span class="val">1 (Apr 28–29)</span></div>
+    <div class="row"><span class="lbl">Est. cost</span><span class="val">₹2,000–4,000/night</span></div>
+    <div class="row"><span class="lbl">Options</span><span class="val">Uday Samudra (beachside) · Muthoot Plaza (city) · Villa Maya (heritage, fine dining)</span></div>
+    <div class="row"><span class="lbl">Tip</span><span class="val">Stay near airport — TRV is only 6 km from city centre. Easiest departure morning.</span></div>
+    <div class="infobox">
+      <div class="r"><span class="k">Arriving from</span><span class="v">Kovalam · ~16 km</span></div>
+      <div class="r"><span class="k">Flight next morning</span><span class="v">TRV · Apr 29</span></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- TRAVEL -->
+<div id="travel" class="pane">
+<div class="content">
+  <div class="note-box" style="margin-bottom:14px"><strong style="color:var(--color-text-primary)">Single outstation cab for 6 days</strong> — book as a package with one driver from Kochi. Cheaper than per-leg booking. Best operators: Cochin Car Rentals (+91 95395 48558) · QDrive (+91 90371 51068)</div>
+
+  <div class="card">
+    <div class="card-title">Day 1 · Apr 24 — Kochi Airport → Munnar</div>
+    <div class="row"><span class="lbl">Route</span><span class="val">Cochin Airport (COK) → Munnar via Kothamangalam ghats</span></div>
+    <div class="row"><span class="lbl">Distance</span><span class="val">~130 km</span></div>
+    <div class="row"><span class="lbl">Duration</span><span class="val">~4 hours</span></div>
+    <div class="row"><span class="lbl">Road type</span><span class="val">Flat highway → steep ghat switchbacks</span></div>
+    <div class="row"><span class="lbl">Sedan fare</span><span class="val">₹2,000–2,500</span></div>
+    <div class="row"><span class="lbl">Innova fare</span><span class="val">₹2,500–3,200</span></div>
+    <div class="row"><span class="lbl">Highlights</span><span class="val">Cheeyappara & Valara waterfalls visible from road</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Day 2 · Apr 25 — Munnar Local Sightseeing</div>
+    <div class="row"><span class="lbl">Route</span><span class="val">Munnar → Eravikulam → Mattupetty → Top Station → return</span></div>
+    <div class="row"><span class="lbl">Distance</span><span class="val">~80 km loop</span></div>
+    <div class="row"><span class="lbl">Duration</span><span class="val">Full day (8 AM–8 PM)</span></div>
+    <div class="row"><span class="lbl">Road type</span><span class="val">Mountain roads, good condition, narrow in places</span></div>
+    <div class="row"><span class="lbl">Sedan fare</span><span class="val">₹1,500–2,000</span></div>
+    <div class="row"><span class="lbl">Innova fare</span><span class="val">₹2,000–2,500</span></div>
+    <div class="row"><span class="lbl">Note</span><span class="val">Driver waits all day — include in your negotiation</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Day 3 · Apr 26 — Munnar → Kumarakom (Direct)</div>
+    <div class="row"><span class="lbl">Route</span><span class="val">Munnar → Kottayam → Kumarakom (no detours)</span></div>
+    <div class="row"><span class="lbl">Distance</span><span class="val">~120 km</span></div>
+    <div class="row"><span class="lbl">Duration</span><span class="val">~3 hours + lunch stop</span></div>
+    <div class="row"><span class="lbl">Road type</span><span class="val">Ghat descent → flat NH highway</span></div>
+    <div class="row"><span class="lbl">Sedan fare</span><span class="val">₹1,800–2,200</span></div>
+    <div class="row"><span class="lbl">Innova fare</span><span class="val">₹2,300–2,800</span></div>
+    <div class="row"><span class="lbl">Lunch stop</span><span class="val">Kottayam town (~1 hr break)</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Day 4 · Apr 27 — Kumarakom → Varkala</div>
+    <div class="row"><span class="lbl">Route</span><span class="val">Kumarakom → Karunagappally → Varkala (coastal highway)</span></div>
+    <div class="row"><span class="lbl">Distance</span><span class="val">~130 km</span></div>
+    <div class="row"><span class="lbl">Duration</span><span class="val">~3.5 hours</span></div>
+    <div class="row"><span class="lbl">Road type</span><span class="val">National highway, mostly flat and smooth</span></div>
+    <div class="row"><span class="lbl">Sedan fare</span><span class="val">₹2,500–3,000</span></div>
+    <div class="row"><span class="lbl">Innova fare</span><span class="val">₹3,200–4,000</span></div>
+    <div class="row"><span class="lbl">Highlights</span><span class="val">Coastal views, fishing villages, Arabian Sea glimpses</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Day 5 · Apr 28 — Varkala → Kovalam → Trivandrum</div>
+    <div class="row"><span class="lbl">Route</span><span class="val">Varkala → Kovalam (55 km) → Trivandrum (16 km)</span></div>
+    <div class="row"><span class="lbl">Distance</span><span class="val">~70 km total</span></div>
+    <div class="row"><span class="lbl">Duration</span><span class="val">~2 hours driving (split across the day)</span></div>
+    <div class="row"><span class="lbl">Road type</span><span class="val">Coastal road, smooth, easy driving</span></div>
+    <div class="row"><span class="lbl">Sedan fare</span><span class="val">₹1,200–1,500</span></div>
+    <div class="row"><span class="lbl">Innova fare</span><span class="val">₹1,500–2,000</span></div>
+    <div class="row"><span class="lbl">Note</span><span class="val">Short legs — most relaxed travel day of the trip</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Day 6 · Apr 29 — Trivandrum City → TRV Airport</div>
+    <div class="row"><span class="lbl">Route</span><span class="val">Shanghumugham Beach → Kuthiramalika Palace → TRV Airport</span></div>
+    <div class="row"><span class="lbl">Distance</span><span class="val">~20 km total city</span></div>
+    <div class="row"><span class="lbl">Airport distance</span><span class="val">6 km from city centre · 15–20 min</span></div>
+    <div class="row"><span class="lbl">Sedan fare</span><span class="val">₹400–600</span></div>
+    <div class="row"><span class="lbl">Innova fare</span><span class="val">₹600–900</span></div>
+    <div class="row"><span class="lbl">Note</span><span class="val">Final fare includes drop at airport — confirm with driver the night before</span></div>
+  </div>
+
+  <div class="km-total">
+    <div style="font-size:12px;font-weight:700;color:var(--color-text-primary);margin-bottom:10px;letter-spacing:-.1px">Distance summary</div>
+    <div class="km-row"><span style="color:var(--color-text-secondary)">Day 1 · Kochi → Munnar</span><span style="font-weight:500">130 km</span></div>
+    <div class="km-row"><span style="color:var(--color-text-secondary)">Day 2 · Munnar local loop</span><span style="font-weight:500">80 km</span></div>
+    <div class="km-row"><span style="color:var(--color-text-secondary)">Day 3 · Munnar → Kumarakom</span><span style="font-weight:500">120 km</span></div>
+    <div class="km-row"><span style="color:var(--color-text-secondary)">Day 4 · Kumarakom → Varkala</span><span style="font-weight:500">130 km</span></div>
+    <div class="km-row"><span style="color:var(--color-text-secondary)">Day 5 · Varkala → Kovalam → Trivandrum</span><span style="font-weight:500">70 km</span></div>
+    <div class="km-row"><span style="color:var(--color-text-secondary)">Day 6 · City → Airport</span><span style="font-weight:500">20 km</span></div>
+    <div class="km-row" style="padding-top:8px;margin-top:4px;border-top:1px solid rgba(26,107,66,.15)"><span style="color:var(--color-text-primary)">Total road travel</span><span style="color:var(--green-700)">~550 km</span></div>
+  </div>
+</div>
+</div>
+
+<!-- FLOW -->
+<div id="flow" class="pane">
+<div class="content">
+  <div class="tl-wrap">
+    <div class="tl-line"></div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#4A63E8"></div>
+      <div class="tl-box"><div class="tl-d">Thu, Apr 24 · 8:00 AM</div><div class="tl-t">Depart Chandigarh ✈</div><div class="tl-s">Flight to Kochi. ~4 hrs.</div></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#4A63E8"></div>
+      <div class="tl-box"><div class="tl-d">Thu, Apr 24 · ~12:00 PM</div><div class="tl-t">Land Cochin Airport (COK)</div><div class="tl-s">Pre-booked cab waiting. Lunch at Fort Kochi — Chinese Fishing Nets stroll. Depart ~2:30 PM.</div></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#888780"></div>
+      <div class="tl-box hl" style="border-left-color:#888780"><div class="tl-d">Thu, Apr 24 · 2:30 PM · CAB · 130 km</div><div class="tl-t">Kochi → Munnar via Kothamangalam ghats</div><div class="tl-s">Scenic ghat switchbacks. Cheeyappara & Valara waterfalls visible from road. ~4 hrs.</div><div class="tl-m"><div class="k">Distance <span>130 km</span></div><div class="k">Time <span>~4 hrs</span></div><div class="k">Fare <span>₹2,000–3,200</span></div></div></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#27a96c"></div>
+      <div class="tl-box hl" style="border-left-color:#27a96c"><div class="tl-d">Thu, Apr 24 · 7:00 PM · CHECK-IN</div><div class="tl-t">Hotel Munnar (Night 1 of 2)</div><div class="tl-s">Evening bazaar stroll — spices, teas, chocolates. Dinner at hotel.</div></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#27a96c"></div>
+      <div class="tl-box"><div class="tl-d">Fri, Apr 25 · 6:30 AM–8:00 PM</div><div class="tl-t">Munnar full day sightseeing</div><div class="tl-s">Eravikulam NP (Nilgiri Tahr) · Mattupetty Dam · Echo Point · Tea factory + gardens · Attukal waterfalls · Top Station sunset (1700m). ~80 km local loop.</div><div class="tl-m"><div class="k">Local distance <span>~80 km</span></div><div class="k">Fare <span>₹1,500–2,500</span></div></div></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#27a96c"></div>
+      <div class="tl-box hl" style="border-left-color:#27a96c"><div class="tl-d">Fri, Apr 25 · Night · STAY</div><div class="tl-t">Hotel Munnar (Night 2 of 2)</div><div class="tl-s">Checkout next morning ~9:30 AM.</div></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#888780"></div>
+      <div class="tl-box hl" style="border-left-color:#888780"><div class="tl-d">Sat, Apr 26 · 10:00 AM · CAB · 120 km</div><div class="tl-t">Munnar → Kumarakom (Direct via Kottayam)</div><div class="tl-s">Lunch stop in Kottayam — duck curry + appam. Descent through rubber plantations. ~3 hrs.</div><div class="tl-m"><div class="k">Distance <span>120 km</span></div><div class="k">Time <span>~3 hrs</span></div><div class="k">Fare <span>₹1,800–2,800</span></div></div></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#1a8fd1"></div>
+      <div class="tl-box hl" style="border-left-color:#1a8fd1"><div class="tl-d">Sat, Apr 26 · 2:30 PM · CHECK-IN</div><div class="tl-t">Resort / Houseboat Kumarakom (1 night)</div><div class="tl-s">4:00 PM Backwater canal cruise (village waterways, kingfishers, egrets). 6:00 PM Sunset over Vembanad Lake. 7:30 PM Karimeen fish dinner.</div></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#888780"></div>
+      <div class="tl-box hl" style="border-left-color:#888780"><div class="tl-d">Sun, Apr 27 · 8:30 AM · CAB · 130 km</div><div class="tl-t">Kumarakom → Varkala (coastal highway)</div><div class="tl-s">Coastal NH through fishing villages. Arrive for cliff lunch + afternoon. ~3.5 hrs.</div><div class="tl-m"><div class="k">Distance <span>130 km</span></div><div class="k">Time <span>~3.5 hrs</span></div><div class="k">Fare <span>₹2,500–4,000</span></div></div></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#e05c3a"></div>
+      <div class="tl-box hl" style="border-left-color:#e05c3a"><div class="tl-d">Sun, Apr 27 · 12:00 PM · CHECK-IN</div><div class="tl-t">Cliff Hotel Varkala (1 night)</div><div class="tl-s">1:00 PM Cliff café lunch. 3:00 PM Cliff walk + Papanasam beach (sacred). 5:00 PM Sunset ritual — Arabian Sea. 7:00 PM Cliff-edge seafood dinner.</div></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#888780"></div>
+      <div class="tl-box hl" style="border-left-color:#888780"><div class="tl-d">Mon, Apr 28 · 9:00–11:00 AM · CAB · 70 km</div><div class="tl-t">Varkala → Kovalam (55 km) → Trivandrum (16 km)</div><div class="tl-s">Optional: Ayurveda massage 9 AM at Varkala before leaving. Kovalam Lighthouse Beach lunch. ~2 hrs total.</div><div class="tl-m"><div class="k">Distance <span>~70 km</span></div><div class="k">Fare <span>₹1,200–2,000</span></div></div></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#7c5cbf"></div>
+      <div class="tl-box hl" style="border-left-color:#7c5cbf"><div class="tl-d">Mon, Apr 28 · 4:30 PM · CHECK-IN</div><div class="tl-t">Hotel Trivandrum (1 night)</div><div class="tl-s">5:30 PM Padmanabhaswamy Temple. 6:30 PM East Fort market + Padmatheertha Pond. 8:00 PM Kerala sadya farewell dinner on banana leaf.</div></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#7c5cbf"></div>
+      <div class="tl-box"><div class="tl-d">Tue, Apr 29 · 7:00 AM</div><div class="tl-t">Departure morning — Trivandrum city</div><div class="tl-s">7:00 AM Shanghumugham Beach sunrise. 9:00 AM Kuthiramalika Palace museum. 10:00 AM Last souvenir shopping. 10:30 AM Checkout.</div></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#888780"></div>
+      <div class="tl-box hl" style="border-left-color:#888780"><div class="tl-d">Tue, Apr 29 · 10:30 AM · FINAL CAB · 20 km</div><div class="tl-t">Hotel → TRV Airport · 6 km · 20 min</div><div class="tl-s">Arrive airport 2–3 hrs before flight. Small, efficient airport.</div><div class="tl-m"><div class="k">Distance <span>~6 km</span></div><div class="k">Fare <span>₹400–900</span></div></div></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#4A63E8"></div>
+      <div class="tl-box"><div class="tl-d">Tue, Apr 29 · Afternoon</div><div class="tl-t">Depart Trivandrum (TRV) ✈ → Chandigarh</div><div class="tl-s">Flight home. Kerala complete.</div></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- EXPENSES -->
+<div id="expenses" class="pane">
+<div class="content">
+  <div class="note-box" style="margin-bottom:14px">Edit any field — totals update instantly. All figures per person unless noted.</div>
+
+  <div class="exp-g">
+    <div class="exp-c">
+      <div class="exp-l">Flights (Chandigarh ↔ Kochi/TRV)</div>
+      <div class="exp-inp"><span style="font-size:12px;color:var(--color-text-tertiary)">₹</span><input type="number" id="e_flight" value="8000" min="0" oninput="calc()"></div>
+      <div class="exp-amt" id="d_flight">₹8,000</div>
+      <div class="exp-sub">Per person round trip (economy)</div>
+    </div>
+    <div class="exp-c">
+      <div class="exp-l">Hotels (5 nights total)</div>
+      <div class="exp-inp"><span style="font-size:12px;color:var(--color-text-tertiary)">₹</span><input type="number" id="e_hotel" value="15000" min="0" oninput="calc()"></div>
+      <div class="exp-amt" id="d_hotel">₹15,000</div>
+      <div class="exp-sub">₹3,000 avg/night (shared room)</div>
+    </div>
+    <div class="exp-c">
+      <div class="exp-l">Outstation cab (6-day package)</div>
+      <div class="exp-inp"><span style="font-size:12px;color:var(--color-text-tertiary)">₹</span><input type="number" id="e_cab" value="18000" min="0" oninput="calc()"></div>
+      <div class="exp-amt" id="d_cab">₹18,000</div>
+      <div class="exp-sub">Innova all-in incl. driver bata + tolls</div>
+    </div>
+    <div class="exp-c">
+      <div class="exp-l">Food & dining (outside hotel)</div>
+      <div class="exp-inp"><span style="font-size:12px;color:var(--color-text-tertiary)">₹</span><input type="number" id="e_food" value="8000" min="0" oninput="calc()"></div>
+      <div class="exp-amt" id="d_food">₹8,000</div>
+      <div class="exp-sub">Meals + snacks + local eats</div>
+    </div>
+    <div class="exp-c">
+      <div class="exp-l">Entry fees & activities</div>
+      <div class="exp-inp"><span style="font-size:12px;color:var(--color-text-tertiary)">₹</span><input type="number" id="e_act" value="3500" min="0" oninput="calc()"></div>
+      <div class="exp-amt" id="d_act">₹3,500</div>
+      <div class="exp-sub">Parks, temple, boat cruise, lighthouse</div>
+    </div>
+    <div class="exp-c">
+      <div class="exp-l">Ayurveda massage (optional)</div>
+      <div class="exp-inp"><span style="font-size:12px;color:var(--color-text-tertiary)">₹</span><input type="number" id="e_ayur" value="2000" min="0" oninput="calc()"></div>
+      <div class="exp-amt" id="d_ayur">₹2,000</div>
+      <div class="exp-sub">Traditional 90-min massage at Varkala</div>
+    </div>
+    <div class="exp-c">
+      <div class="exp-l">Shopping — tea, spices, food gifts</div>
+      <div class="exp-inp"><span style="font-size:12px;color:var(--color-text-tertiary)">₹</span><input type="number" id="e_food2" value="3000" min="0" oninput="calc()"></div>
+      <div class="exp-amt" id="d_food2">₹3,000</div>
+      <div class="exp-sub">Munnar tea, spices, chocolates, coffee</div>
+    </div>
+    <div class="exp-c">
+      <div class="exp-l">Souvenirs & handicrafts</div>
+      <div class="exp-inp"><span style="font-size:12px;color:var(--color-text-tertiary)">₹</span><input type="number" id="e_merch" value="3000" min="0" oninput="calc()"></div>
+      <div class="exp-amt" id="d_merch">₹3,000</div>
+      <div class="exp-sub">Kasavu fabric, moirakari, local art</div>
+    </div>
+    <div class="exp-c">
+      <div class="exp-l">Miscellaneous / buffer</div>
+      <div class="exp-inp"><span style="font-size:12px;color:var(--color-text-tertiary)">₹</span><input type="number" id="e_misc" value="2500" min="0" oninput="calc()"></div>
+      <div class="exp-amt" id="d_misc">₹2,500</div>
+      <div class="exp-sub">Tips, tolls, sim card, extras</div>
+    </div>
+    <div class="exp-c" style="grid-column:1/-1;background:linear-gradient(135deg,var(--green-50),var(--slate-50));border-color:rgba(26,107,66,.15)">
+      <div class="exp-l">Number of people</div>
+      <div class="exp-inp"><input type="number" id="e_pax" value="2" min="1" max="10" oninput="calc()"></div>
+      <div style="font-size:11px;color:var(--color-text-secondary);margin-top:4px">Cab + hotel (shared) costs split; flights + personal costs per person</div>
+    </div>
+  </div>
+
+  <div class="total-box">
+    <div class="total-nums">
+      <div class="total-num"><div class="l">Total per person</div><div class="n" id="t_pp">₹57,500</div></div>
+      <div class="total-num"><div class="l">Total for <span id="t_paxlabel">2</span> people</div><div class="n" id="t_all">₹1,15,000</div></div>
+    </div>
+    <div style="font-size:12px;font-weight:700;color:var(--color-text-primary);margin-bottom:10px;letter-spacing:-.1px">Breakdown</div>
+    <div class="bdg-row"><span class="k">Flights (per person × pax)</span><span class="v" id="b_flight">₹16,000</span></div>
+    <div class="bdg-row"><span class="k">Hotels (shared, 5 nights)</span><span class="v" id="b_hotel">₹15,000</span></div>
+    <div class="bdg-row"><span class="k">Cab (shared, 6-day pkg)</span><span class="v" id="b_cab">₹18,000</span></div>
+    <div class="bdg-row"><span class="k">Food & dining (per person × pax)</span><span class="v" id="b_food">₹16,000</span></div>
+    <div class="bdg-row"><span class="k">Activities & entry (per person × pax)</span><span class="v" id="b_act">₹7,000</span></div>
+    <div class="bdg-row"><span class="k">Ayurveda (per person × pax)</span><span class="v" id="b_ayur">₹4,000</span></div>
+    <div class="bdg-row"><span class="k">Shopping — food gifts (per person × pax)</span><span class="v" id="b_food2">₹6,000</span></div>
+    <div class="bdg-row"><span class="k">Souvenirs & handicrafts (per person × pax)</span><span class="v" id="b_merch">₹6,000</span></div>
+    <div class="bdg-row"><span class="k">Miscellaneous (per person × pax)</span><span class="v" id="b_misc">₹5,000</span></div>
+    <div style="border-top:1.5px solid var(--slate-100);margin-top:10px;padding-top:10px;display:flex;justify-content:space-between;font-size:14px;font-weight:700;color:var(--color-text-primary)">
+      <span>Grand total</span><span id="b_grand" style="color:var(--green-700)">₹1,15,000</span>
+    </div>
+    <div style="border-top:1px solid var(--slate-100);margin-top:10px;padding-top:10px;display:flex;justify-content:space-between;font-size:12px;color:var(--color-text-secondary)">
+      <span>Total distance driven</span><span style="font-weight:600;color:var(--color-text-primary)">~550 km</span>
+    </div>
+  </div>
+
+  <div class="note-box">
+    <strong style="color:var(--color-text-primary)">Budget tiers (per person):</strong><br>
+    Budget ₹40,000–50,000 — budget hotels ₹1,500/night, local dhabas, sedan cab<br>
+    Comfort ₹55,000–70,000 — mid-range hotels, restaurants, Innova cab (defaults above)<br>
+    Luxury ₹85,000+ — 3-star+ hotels ₹4,000+/night, fine dining, premium experiences<br><br>
+    <strong style="color:var(--color-text-primary)">Note:</strong> Cab and hotel costs are shared. For couples, hotel is 1× (single room), cab is 1×. Flights, food, activities, shopping are per person.
+  </div>
+</div>
+</div>
+
+</div><!-- /app-wrap -->
+
+<script>
+function sw(id, el) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
+  document.querySelectorAll('.pane').forEach(p => p.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  el.classList.add('on');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function fmt(n) {
+  return '₹' + Math.round(n).toLocaleString('en-IN');
+}
+
+function calc() {
+  const flight = parseFloat(document.getElementById('e_flight').value) || 0;
+  const hotel  = parseFloat(document.getElementById('e_hotel').value)  || 0;
+  const cab    = parseFloat(document.getElementById('e_cab').value)    || 0;
+  const food   = parseFloat(document.getElementById('e_food').value)   || 0;
+  const act    = parseFloat(document.getElementById('e_act').value)    || 0;
+  const ayur   = parseFloat(document.getElementById('e_ayur').value)   || 0;
+  const food2  = parseFloat(document.getElementById('e_food2').value)  || 0;
+  const merch  = parseFloat(document.getElementById('e_merch').value)  || 0;
+  const misc   = parseFloat(document.getElementById('e_misc').value)   || 0;
+  const pax    = Math.max(1, parseInt(document.getElementById('e_pax').value) || 1);
+
+  document.getElementById('d_flight').textContent = fmt(flight);
+  document.getElementById('d_hotel').textContent  = fmt(hotel);
+  document.getElementById('d_cab').textContent    = fmt(cab);
+  document.getElementById('d_food').textContent   = fmt(food);
+  document.getElementById('d_act').textContent    = fmt(act);
+  document.getElementById('d_ayur').textContent   = fmt(ayur);
+  document.getElementById('d_food2').textContent  = fmt(food2);
+  document.getElementById('d_merch').textContent  = fmt(merch);
+  document.getElementById('d_misc').textContent   = fmt(misc);
+
+  const perPerson = flight + food + act + ayur + food2 + merch + misc;
+  const shared    = hotel + cab;
+  const grandTotal = (perPerson * pax) + shared;
+  const pp = perPerson + (shared / pax);
+
+  document.getElementById('t_pp').textContent     = fmt(pp);
+  document.getElementById('t_all').textContent    = fmt(grandTotal);
+  document.getElementById('t_paxlabel').textContent = pax;
+
+  document.getElementById('b_flight').textContent  = fmt(flight * pax);
+  document.getElementById('b_hotel').textContent   = fmt(hotel);
+  document.getElementById('b_cab').textContent     = fmt(cab);
+  document.getElementById('b_food').textContent    = fmt(food * pax);
+  document.getElementById('b_act').textContent     = fmt(act * pax);
+  document.getElementById('b_ayur').textContent    = fmt(ayur * pax);
+  document.getElementById('b_food2').textContent   = fmt(food2 * pax);
+  document.getElementById('b_merch').textContent   = fmt(merch * pax);
+  document.getElementById('b_misc').textContent    = fmt(misc * pax);
+  document.getElementById('b_grand').textContent   = fmt(grandTotal);
+}
+
+calc();
+</script>
+</body>
+</html>
