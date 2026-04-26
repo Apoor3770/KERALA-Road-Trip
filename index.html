@@ -83,45 +83,145 @@ body {
 }
 
 /* ═══════════════════════════════════════════════════════
-   HERO — Full-bleed botanical header
+   HERO — Dynamic animated banner
 ═══════════════════════════════════════════════════════ */
 .hero {
   position: relative;
-  background: var(--forest);
   overflow: hidden;
   padding: 0;
+  background: linear-gradient(
+    135deg,
+    #0e2818 0%,
+    #1a3d28 20%,
+    #1f5a3d 40%,
+    #2b5c3f 60%,
+    #1a3d28 80%,
+    #0e2818 100%
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 18s ease infinite;
 }
 
-/* SVG botanical background texture */
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  25%  { background-position: 50% 0%; }
+  50%  { background-position: 100% 50%; }
+  75%  { background-position: 50% 100%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Animated radial glow that pulses and moves */
 .hero-bg {
   position: absolute; inset: 0;
   background:
-    radial-gradient(ellipse 120% 80% at 85% 110%, rgba(200,148,58,.18) 0%, transparent 55%),
-    radial-gradient(ellipse 80% 100% at -15% 50%, rgba(90,158,111,.15) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 60% at 50% -20%, rgba(43,92,63,.6) 0%, transparent 60%);
+    radial-gradient(ellipse 60% 50% at 20% 30%, rgba(200,148,58,.22) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 60% at 80% 70%, rgba(90,158,111,.20) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 40% at 50% 90%, rgba(30,100,144,.15) 0%, transparent 60%);
+  animation: glowDrift 20s ease-in-out infinite;
 }
 
-/* Decorative leaf silhouettes via CSS */
+@keyframes glowDrift {
+  0%, 100% {
+    background:
+      radial-gradient(ellipse 60% 50% at 20% 30%, rgba(200,148,58,.22) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 60% at 80% 70%, rgba(90,158,111,.20) 0%, transparent 50%),
+      radial-gradient(ellipse 40% 40% at 50% 90%, rgba(30,100,144,.15) 0%, transparent 60%);
+  }
+  33% {
+    background:
+      radial-gradient(ellipse 70% 60% at 70% 20%, rgba(200,148,58,.25) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 50% at 30% 80%, rgba(90,158,111,.22) 0%, transparent 50%),
+      radial-gradient(ellipse 50% 40% at 80% 50%, rgba(30,100,144,.18) 0%, transparent 60%);
+  }
+  66% {
+    background:
+      radial-gradient(ellipse 50% 60% at 50% 80%, rgba(200,148,58,.20) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 50% at 90% 30%, rgba(90,158,111,.25) 0%, transparent 50%),
+      radial-gradient(ellipse 40% 50% at 20% 60%, rgba(30,100,144,.15) 0%, transparent 60%);
+  }
+}
+
+/* Floating particles layer */
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(232,185,106,.6) 0px, transparent 1.5px),
+    radial-gradient(circle at 75% 35%, rgba(232,185,106,.5) 0px, transparent 2px),
+    radial-gradient(circle at 40% 60%, rgba(245,228,192,.4) 0px, transparent 1.2px),
+    radial-gradient(circle at 85% 80%, rgba(232,185,106,.5) 0px, transparent 1.8px),
+    radial-gradient(circle at 25% 85%, rgba(245,228,192,.4) 0px, transparent 1.2px),
+    radial-gradient(circle at 60% 15%, rgba(232,185,106,.4) 0px, transparent 1.5px),
+    radial-gradient(circle at 90% 50%, rgba(245,228,192,.5) 0px, transparent 1.6px),
+    radial-gradient(circle at 5% 55%, rgba(232,185,106,.5) 0px, transparent 1.4px);
+  background-size: 100% 100%;
+  animation: particleFloat 25s linear infinite;
+  pointer-events: none;
+  opacity: .8;
+}
+
+@keyframes particleFloat {
+  0%   { background-position: 0% 0%, 20% 10%, 40% 30%, 60% 50%, 80% 70%, 30% 80%, 70% 20%, 50% 90%; }
+  100% { background-position: 5% 100%, 25% 110%, 45% 130%, 65% 150%, 85% 170%, 35% 180%, 75% 120%, 55% 190%; }
+}
+
+/* Aurora shimmer overlay */
+.hero::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(
+      105deg,
+      transparent 30%,
+      rgba(232,185,106,.06) 40%,
+      rgba(158,196,168,.08) 50%,
+      rgba(232,185,106,.06) 60%,
+      transparent 70%
+    ),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-size: 200% 100%, 150px 150px;
+  animation: auroraSlide 12s ease-in-out infinite;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+@keyframes auroraSlide {
+  0%, 100% { background-position: -50% 0%, 0% 0%; }
+  50%      { background-position: 150% 0%, 0% 0%; }
+}
+
+/* Decorative leaf silhouettes — animated drift */
 .hero-leaf {
   position: absolute;
   pointer-events: none;
   user-select: none;
-  opacity: .07;
+  opacity: .08;
   font-size: 160px;
   line-height: 1;
+  filter: blur(.5px);
 }
-.hero-leaf-1 { right: -20px; top: -20px; transform: rotate(-20deg); }
-.hero-leaf-2 { left: -30px; bottom: -30px; transform: rotate(40deg); font-size: 120px; opacity: .05; }
+.hero-leaf-1 {
+  right: -20px; top: -20px;
+  animation: leafSway1 14s ease-in-out infinite;
+}
+.hero-leaf-2 {
+  left: -30px; bottom: -30px;
+  font-size: 120px;
+  opacity: .06;
+  animation: leafSway2 16s ease-in-out infinite;
+}
 
-/* Grain texture overlay */
-.hero::after {
-  content: '';
-  position: absolute; inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  background-size: 150px 150px;
-  opacity: .4;
-  mix-blend-mode: overlay;
-  pointer-events: none;
+@keyframes leafSway1 {
+  0%, 100% { transform: rotate(-20deg) translate(0, 0); }
+  25%      { transform: rotate(-15deg) translate(-8px, 6px); }
+  50%      { transform: rotate(-25deg) translate(-12px, -4px); }
+  75%      { transform: rotate(-18deg) translate(-4px, 8px); }
+}
+
+@keyframes leafSway2 {
+  0%, 100% { transform: rotate(40deg) translate(0, 0); }
+  33%      { transform: rotate(45deg) translate(8px, -6px); }
+  66%      { transform: rotate(35deg) translate(12px, 4px); }
 }
 
 .hero-inner {
@@ -852,19 +952,768 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
 input[type=number] { -moz-appearance: textfield; }
 
 /* ═══════════════════════════════════════════════════════
-   STAGGER ANIMATION ON LOAD
+   ANIMATIONS — Comprehensive motion design system
 ═══════════════════════════════════════════════════════ */
-.card, .stat, .tl-item, .exp-c, .total-box, .km-total {
+
+/* ━━━ KEYFRAMES ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@keyframes heroFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slideUpBig {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(.8); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes scaleInBounce {
+  0%   { opacity: 0; transform: scale(.5); }
+  60%  { transform: scale(1.1); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes floatRotate {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25%      { transform: translateY(-15px) rotate(3deg); }
+  50%      { transform: translateY(-8px) rotate(-2deg); }
+  75%      { transform: translateY(-12px) rotate(2deg); }
+}
+@keyframes shimmer {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: .4; }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: .7; transform: scale(1.05); }
+}
+@keyframes ripple {
+  0%   { box-shadow: 0 0 0 0 rgba(200,148,58,.7); }
+  100% { box-shadow: 0 0 0 15px rgba(200,148,58,0); }
+}
+@keyframes drawLine {
+  from { transform: scaleX(0); transform-origin: left; }
+  to   { transform: scaleX(1); transform-origin: left; }
+}
+@keyframes drawLineVertical {
+  from { transform: scaleY(0); transform-origin: top; }
+  to   { transform: scaleY(1); transform-origin: top; }
+}
+@keyframes expandWidth {
+  from { transform: scaleX(0); opacity: 0; }
+  to   { transform: scaleX(1); opacity: 1; }
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes spinIn {
+  from { transform: rotate(-180deg) scale(.3); opacity: 0; }
+  to   { transform: rotate(0deg) scale(1); opacity: 1; }
+}
+@keyframes slideDownStick {
+  from { opacity: 0; transform: translateY(-100%); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes totalShimmer {
+  0%, 100% { 
+    background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--fern));
+  }
+  50% { 
+    background: linear-gradient(90deg, var(--fern), var(--gold), var(--gold-light));
+  }
+}
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(200,148,58,.3); }
+  50%      { box-shadow: 0 0 20px rgba(200,148,58,.6); }
+}
+
+/* ━━━ HERO ANIMATIONS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.hero {
+  animation: heroFadeIn .8s ease;
+}
+.hero-eyebrow {
+  animation: slideUp .6s cubic-bezier(.4,0,.2,1) .1s both;
+}
+.hero h1 {
+  animation: slideUpBig .8s cubic-bezier(.4,0,.2,1) .15s both;
+}
+.hero-tagline {
+  animation: fadeIn .7s ease .35s both;
+}
+.hero-stats {
+  animation: slideUp .6s cubic-bezier(.4,0,.2,1) .5s both;
+}
+.hero-stat {
+  animation: scaleIn .5s cubic-bezier(.34,1.56,.64,1) both;
+  transition: all .3s cubic-bezier(.34,1.56,.64,1);
+}
+.hero-stat:nth-child(1) { animation-delay: .6s; }
+.hero-stat:nth-child(2) { animation-delay: .7s; }
+.hero-stat:nth-child(3) { animation-delay: .8s; }
+.hero-stat:nth-child(4) { animation-delay: .9s; }
+.hero-stat:hover {
+  background: rgba(245,240,232,.24);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 24px rgba(0,0,0,.15);
+}
+/* Hero leaf animations use leafSway1/leafSway2 from main hero section */
+.hero-divider {
+  animation: expandWidth 1.4s cubic-bezier(.4,0,.2,1) 1.1s both;
+}
+
+/* ━━━ NAVIGATION ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.nav-bar {
+  animation: slideDownStick .6s cubic-bezier(.4,0,.2,1) 1.2s both;
+}
+.tab {
+  position: relative;
+  transition: all .25s cubic-bezier(.4,0,.2,1);
+}
+.tab::after {
+  content: '';
+  position: absolute; bottom: -1px; left: 50%; right: 50%;
+  height: 2px; background: var(--gold);
+  transition: all .3s cubic-bezier(.4,0,.2,1);
+  opacity: 0;
+}
+.tab.on::after {
+  left: 0; right: 0; opacity: 1;
+}
+.tab:hover:not(.on) {
+  transform: translateY(-2px);
+  color: var(--moss);
+}
+.tab:active {
+  transform: translateY(0);
+}
+/* Hero leaf animations defined in main hero section above */
+
+/* Nav bar entrance */
+@keyframes navSlide {
+  from { transform: translateY(-100%); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+.nav-bar {
+  animation: navSlide .4s cubic-bezier(.4,0,.2,1) both;
+  animation-delay: .6s;
+}
+
+/* Tab ripple effect on click */
+.tab {
+  position: relative;
+  overflow: hidden;
+}
+.tab::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle, rgba(61,122,82,.15) 0%, transparent 70%);
+  opacity: 0;
+  transform: scale(0);
+  transition: transform .5s, opacity .5s;
+}
+.tab:active::before {
+  transform: scale(2);
+  opacity: 1;
+  transition: transform 0s, opacity 0s;
+}
+
+/* Staggered card entrance */
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.card, .stat, .tl-item, .exp-c, .total-box, .km-total, .note-box {
+  animation: riseIn .5s cubic-bezier(.4,0,.2,1) both;
+}
+
+/* Stagger delays for stats grid */
+.stat:nth-child(1) { animation-delay: .05s; }
+.stat:nth-child(2) { animation-delay: .1s; }
+.stat:nth-child(3) { animation-delay: .15s; }
+.stat:nth-child(4) { animation-delay: .2s; }
+
+/* Stagger delays for cards */
+.card:nth-child(1) { animation-delay: .08s; }
+.card:nth-child(2) { animation-delay: .12s; }
+.card:nth-child(3) { animation-delay: .16s; }
+.card:nth-child(4) { animation-delay: .2s; }
+.card:nth-child(5) { animation-delay: .24s; }
+.card:nth-child(6) { animation-delay: .28s; }
+
+/* Stagger timeline items */
+.tl-item:nth-child(1)  { animation-delay: .04s; }
+.tl-item:nth-child(2)  { animation-delay: .06s; }
+.tl-item:nth-child(3)  { animation-delay: .08s; }
+.tl-item:nth-child(4)  { animation-delay: .1s; }
+.tl-item:nth-child(5)  { animation-delay: .12s; }
+.tl-item:nth-child(6)  { animation-delay: .14s; }
+.tl-item:nth-child(7)  { animation-delay: .16s; }
+.tl-item:nth-child(8)  { animation-delay: .18s; }
+.tl-item:nth-child(9)  { animation-delay: .2s; }
+.tl-item:nth-child(10) { animation-delay: .22s; }
+.tl-item:nth-child(11) { animation-delay: .24s; }
+.tl-item:nth-child(12) { animation-delay: .26s; }
+.tl-item:nth-child(13) { animation-delay: .28s; }
+.tl-item:nth-child(14) { animation-delay: .3s; }
+.tl-item:nth-child(15) { animation-delay: .32s; }
+
+/* Expense grid stagger */
+.exp-c:nth-child(1) { animation-delay: .05s; }
+.exp-c:nth-child(2) { animation-delay: .08s; }
+.exp-c:nth-child(3) { animation-delay: .11s; }
+.exp-c:nth-child(4) { animation-delay: .14s; }
+.exp-c:nth-child(5) { animation-delay: .17s; }
+.exp-c:nth-child(6) { animation-delay: .2s; }
+.exp-c:nth-child(7) { animation-delay: .23s; }
+.exp-c:nth-child(8) { animation-delay: .26s; }
+.exp-c:nth-child(9) { animation-delay: .29s; }
+.exp-c:nth-child(10) { animation-delay: .32s; }
+
+/* Stat card pulse on hover */
+@keyframes statPulse {
+  0%   { box-shadow: var(--shadow-sm); }
+  50%  { box-shadow: var(--shadow-md), 0 0 0 0 rgba(61,122,82,.15); }
+  100% { box-shadow: var(--shadow-sm); }
+}
+.stat:hover {
+  animation: statPulse .6s ease-in-out;
+}
+
+/* Route node hop animation */
+@keyframes nodeHop {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-4px); }
+}
+.route-node:hover {
+  animation: nodeHop .4s ease-in-out;
+}
+.route-dot {
+  transition: transform .3s cubic-bezier(.4,0,.2,1);
+}
+.route-node:hover .route-dot {
+  transform: scale(1.3);
+}
+
+/* Badge shimmer */
+@keyframes badgeShimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.bdg:hover {
+  background-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,.5) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: badgeShimmer 1.5s ease-in-out;
+}
+
+/* Timeline dot pulse */
+@keyframes dotPulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 1.5px rgba(0,0,0,.12), 0 2px 6px rgba(0,0,0,.12); }
+  50%      { transform: scale(1.4); box-shadow: 0 0 0 4px rgba(0,0,0,.08), 0 4px 12px rgba(0,0,0,.18); }
+}
+.tl-item:hover .tl-dot {
+  animation: dotPulse .6s cubic-bezier(.4,0,.2,1);
+}
+
+/* Timeline box slide with shadow grow */
+.tl-box {
+  transition: all .3s cubic-bezier(.4,0,.2,1);
+}
+.tl-box:hover {
+  transform: translateX(5px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Input focus glow wave */
+@keyframes inputGlow {
+  0%   { box-shadow: 0 0 0 0 rgba(61,122,82,.3); }
+  50%  { box-shadow: 0 0 0 6px rgba(61,122,82,0); }
+  100% { box-shadow: 0 0 0 0 rgba(61,122,82,0); }
+}
+.exp-inp input:focus {
+  animation: inputGlow .6s ease-out;
+}
+
+/* Total box grand entrance */
+@keyframes totalBoxEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.total-box {
+  animation: totalBoxEntrance .6s cubic-bezier(.4,0,.2,1) both;
+  animation-delay: .3s;
+}
+
+/* Total number count-up effect (simulated with scale) */
+@keyframes numberPop {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+.total-num .n {
+  display: inline-block;
+  transition: transform .3s cubic-bezier(.4,0,.2,1);
+}
+.total-box:hover .total-num .n {
+  animation: numberPop .5s cubic-bezier(.4,0,.2,1);
+}
+
+/* Gradient bar shimmer on total box */
+.total-box::before {
+  background: linear-gradient(90deg,
+    var(--gold) 0%,
+    var(--gold-light) 25%,
+    var(--fern) 50%,
+    var(--gold-light) 75%,
+    var(--gold) 100%
+  );
+  background-size: 200% 100%;
+  animation: gradientShift 3s ease-in-out infinite;
+}
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% center; }
+  50%      { background-position: 100% center; }
+}
+
+/* Breakdown row slide in */
+@keyframes rowSlide {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.bdg-row {
+  animation: rowSlide .4s cubic-bezier(.4,0,.2,1) both;
+}
+.bdg-row:nth-child(1) { animation-delay: .4s; }
+.bdg-row:nth-child(2) { animation-delay: .45s; }
+.bdg-row:nth-child(3) { animation-delay: .5s; }
+.bdg-row:nth-child(4) { animation-delay: .55s; }
+.bdg-row:nth-child(5) { animation-delay: .6s; }
+.bdg-row:nth-child(6) { animation-delay: .65s; }
+.bdg-row:nth-child(7) { animation-delay: .7s; }
+.bdg-row:nth-child(8) { animation-delay: .75s; }
+.bdg-row:nth-child(9) { animation-delay: .8s; }
+
+/* Grand total row emphasis */
+@keyframes grandTotalGlow {
+  0%, 100% { text-shadow: 0 0 0 transparent; }
+  50%      { text-shadow: 0 0 12px rgba(200,148,58,.4); }
+}
+.grand-total-row .v {
+  animation: grandTotalGlow 2s ease-in-out infinite;
+}
+
+/* Section header decorative line draw */
+@keyframes lineDraw {
+  from { transform: scaleX(0); transform-origin: left; }
+  to   { transform: scaleX(1); transform-origin: left; }
+}
+.sec-h::after {
+  animation: lineDraw .5s cubic-bezier(.4,0,.2,1) both;
+  animation-delay: .15s;
+}
+
+/* Hotel/Day card header badge bounce */
+@keyframes badgeBounce {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.1); }
+}
+.day-num, .hotel-header .bdg {
+  transition: transform .3s cubic-bezier(.4,0,.2,1);
+}
+.day-header:hover .day-num {
+  animation: badgeBounce .5s cubic-bezier(.4,0,.2,1);
+}
+
+/* Smooth height transitions for collapsibles (if any added later) */
+* {
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-duration: .2s;
+  transition-timing-function: cubic-bezier(.4,0,.2,1);
+}
+
+/* Reset animations when switching tabs for smooth re-entrance */
+.pane:not(.on) * {
+  animation: none !important;
+}
+
+/* Pane switch with stagger reset */
+.pane.on .card,
+.pane.on .stat,
+.pane.on .tl-item,
+.pane.on .exp-c,
+.pane.on .total-box,
+.pane.on .note-box {
   animation: riseIn .4s cubic-bezier(.4,0,.2,1) both;
 }
-.stat:nth-child(1) { animation-delay: .04s; }
-.stat:nth-child(2) { animation-delay: .08s; }
-.stat:nth-child(3) { animation-delay: .12s; }
-.stat:nth-child(4) { animation-delay: .16s; }
 
-@keyframes riseIn {
-  from { opacity: 0; transform: translateY(10px); }
+/* Info box subtle scale on hover */
+.infobox {
+  transition: transform .3s cubic-bezier(.4,0,.2,1), box-shadow .3s;
+}
+.infobox:hover {
+  transform: scale(1.01);
+  box-shadow: 0 4px 12px rgba(61,122,82,.08);
+}
+
+/* Note box attention pulse */
+@keyframes notePulse {
+  0%, 100% { border-left-color: var(--gold); }
+  50%      { border-left-color: var(--gold-light); }
+}
+.note-box {
+  animation: notePulse 3s ease-in-out infinite;
+}
+
+/* Km total rows count animation */
+.km-row:last-child {
+  transition: all .3s cubic-bezier(.4,0,.2,1);
+}
+.km-total:hover .km-row:last-child {
+  background: linear-gradient(90deg, rgba(61,122,82,.05), transparent);
+  padding-left: 8px;
+}
+
+/* Scroll-triggered fade-in for elements (requires JS intersection observer - added below) */
+.scroll-fade {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .6s cubic-bezier(.4,0,.2,1), transform .6s cubic-bezier(.4,0,.2,1);
+}
+.scroll-fade.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Loading skeleton shimmer (for future enhancements) */
+@keyframes skeletonShimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Micro-interaction: Card title underline on hover */
+.card-title {
+  position: relative;
+  display: inline-block;
+  transition: color .3s;
+}
+.card-title::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--fern));
+  transition: width .4s cubic-bezier(.4,0,.2,1);
+}
+.card:hover .card-title::after {
+  width: 100%;
+}
+
+/* Time text emphasis on hover */
+.t-row:hover .t-time {
+  color: var(--gold-light);
+  transform: translateX(2px);
+  transition: all .2s;
+}
+.t-row:hover .t-text {
+  color: var(--moss);
+  transition: color .2s;
+}
+
+/* ━━━ STATS GRID ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.stat {
+  animation: scaleInBounce .6s cubic-bezier(.34,1.56,.64,1) both;
+  transition: all .3s cubic-bezier(.4,0,.2,1);
+}
+.stat:nth-child(1) { animation-delay: .05s; }
+.stat:nth-child(2) { animation-delay: .12s; }
+.stat:nth-child(3) { animation-delay: .19s; }
+.stat:nth-child(4) { animation-delay: .26s; }
+.stat:hover {
+  transform: translateY(-5px) scale(1.02);
+}
+.stat::before {
+  transition: opacity .3s ease;
+}
+.stat:hover::before {
+  animation: shimmer 1.5s ease infinite;
+}
+
+/* ━━━ CARDS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.card {
+  animation: slideUp .5s cubic-bezier(.4,0,.2,1) both;
+  transition: all .3s cubic-bezier(.4,0,.2,1);
+}
+.card:nth-child(1) { animation-delay: .33s; }
+.card:nth-child(2) { animation-delay: .38s; }
+.card:nth-child(3) { animation-delay: .43s; }
+.card:nth-child(4) { animation-delay: .48s; }
+.card:nth-child(5) { animation-delay: .53s; }
+.card:nth-child(6) { animation-delay: .58s; }
+.card:nth-child(7) { animation-delay: .63s; }
+.card:hover {
+  transform: translateY(-6px);
+}
+
+/* ━━━ BADGES ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.bdg {
+  transition: all .25s cubic-bezier(.34,1.56,.64,1);
+}
+.bdg:hover {
+  transform: scale(1.12) translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,.18);
+  cursor: default;
+}
+
+/* ━━━ ROUTE VISUALIZATION ━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.route-dot {
+  transition: all .3s cubic-bezier(.34,1.56,.64,1);
+}
+.route-node:hover .route-dot {
+  transform: scale(1.6);
+  box-shadow: 
+    0 0 0 3px rgba(255,255,255,.95), 
+    0 0 0 6px rgba(0,0,0,.12),
+    0 0 25px rgba(200,148,58,.5);
+  animation: pulse 1.5s ease infinite;
+}
+
+/* ━━━ DAY CARDS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.day-num {
+  animation: spinIn .7s cubic-bezier(.34,1.56,.64,1) both;
+  transition: transform .4s cubic-bezier(.34,1.56,.64,1);
+}
+.day-header:hover .day-num {
+  transform: rotate(360deg) scale(1.15);
+  animation: glow 2s ease infinite;
+}
+
+/* ━━━ TIMELINE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.tl-line {
+  animation: drawLineVertical 2s cubic-bezier(.4,0,.2,1) .4s both;
+}
+.tl-item {
+  animation: slideInLeft .5s cubic-bezier(.4,0,.2,1) both;
+}
+.tl-item:nth-child(1)  { animation-delay: .05s; }
+.tl-item:nth-child(2)  { animation-delay: .09s; }
+.tl-item:nth-child(3)  { animation-delay: .13s; }
+.tl-item:nth-child(4)  { animation-delay: .17s; }
+.tl-item:nth-child(5)  { animation-delay: .21s; }
+.tl-item:nth-child(6)  { animation-delay: .25s; }
+.tl-item:nth-child(7)  { animation-delay: .29s; }
+.tl-item:nth-child(8)  { animation-delay: .33s; }
+.tl-item:nth-child(9)  { animation-delay: .37s; }
+.tl-item:nth-child(10) { animation-delay: .41s; }
+.tl-item:nth-child(11) { animation-delay: .45s; }
+.tl-item:nth-child(12) { animation-delay: .49s; }
+.tl-item:nth-child(13) { animation-delay: .53s; }
+.tl-item:nth-child(14) { animation-delay: .57s; }
+.tl-item:nth-child(15) { animation-delay: .61s; }
+.tl-dot {
+  transition: all .3s cubic-bezier(.34,1.56,.64,1);
+}
+.tl-item:hover .tl-dot {
+  transform: scale(1.6);
+  box-shadow: 
+    0 0 0 2px var(--ivory), 
+    0 0 0 4px rgba(200,148,58,.4),
+    0 0 20px rgba(200,148,58,.6);
+  animation: ripple 1.5s ease infinite;
+}
+.tl-box {
+  transition: all .3s cubic-bezier(.4,0,.2,1);
+}
+.tl-box:hover {
+  transform: translateX(8px);
+  border-left-width: 5px !important;
+  box-shadow: var(--shadow-lg);
+}
+
+/* ━━━ EXPENSE CARDS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.exp-c {
+  animation: scaleIn .5s cubic-bezier(.34,1.56,.64,1) both;
+  transition: all .25s cubic-bezier(.4,0,.2,1);
+  position: relative; overflow: hidden;
+}
+.exp-c:nth-child(1)  { animation-delay: .05s; }
+.exp-c:nth-child(2)  { animation-delay: .09s; }
+.exp-c:nth-child(3)  { animation-delay: .13s; }
+.exp-c:nth-child(4)  { animation-delay: .17s; }
+.exp-c:nth-child(5)  { animation-delay: .21s; }
+.exp-c:nth-child(6)  { animation-delay: .25s; }
+.exp-c:nth-child(7)  { animation-delay: .29s; }
+.exp-c:nth-child(8)  { animation-delay: .33s; }
+.exp-c:nth-child(9)  { animation-delay: .37s; }
+.exp-c:nth-child(10) { animation-delay: .41s; }
+.exp-c::after {
+  content: '';
+  position: absolute; top: 0; left: -100%; right: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  transition: left .5s ease, right .5s ease;
+}
+.exp-c:hover {
+  transform: translateY(-3px);
+}
+.exp-c:hover::after {
+  left: 0; right: 0;
+}
+.exp-c:focus-within {
+  transform: translateY(-3px) scale(1.02);
+}
+.exp-inp input {
+  transition: all .25s cubic-bezier(.4,0,.2,1);
+}
+.exp-inp input:focus {
+  transform: scale(1.03);
+}
+
+/* ━━━ TOTAL BOX ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.total-box {
+  animation: slideUp .6s cubic-bezier(.4,0,.2,1) .45s both;
+}
+.total-box::before {
+  animation: totalShimmer 4s ease infinite;
+}
+.total-num .n {
+  transition: transform .3s cubic-bezier(.34,1.56,.64,1);
+}
+.total-box:hover .total-num .n {
+  transform: scale(1.1);
+  text-shadow: 0 0 20px rgba(200,148,58,.4);
+}
+
+/* ━━━ KM SUMMARY ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.km-total {
+  animation: slideUp .6s cubic-bezier(.4,0,.2,1) .5s both;
+}
+.km-row {
+  animation: slideInRight .4s cubic-bezier(.4,0,.2,1) both;
+  transition: all .2s ease;
+  position: relative;
+}
+.km-row:nth-child(1) { animation-delay: .55s; }
+.km-row:nth-child(2) { animation-delay: .60s; }
+.km-row:nth-child(3) { animation-delay: .65s; }
+.km-row:nth-child(4) { animation-delay: .70s; }
+.km-row:nth-child(5) { animation-delay: .75s; }
+.km-row:nth-child(6) { animation-delay: .80s; }
+.km-row:nth-child(7) { animation-delay: .85s; }
+.km-row::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 3px; background: var(--gold);
+  transform: scaleY(0);
+  transition: transform .3s cubic-bezier(.4,0,.2,1);
+}
+.km-row:hover {
+  background: rgba(200,148,58,.04);
+  padding-left: 8px;
+  margin-left: -5px;
+}
+.km-row:hover::before {
+  transform: scaleY(1);
+}
+
+/* ━━━ NOTE BOX ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.note-box {
+  animation: slideUp .5s cubic-bezier(.4,0,.2,1) .4s both;
+  transition: all .25s cubic-bezier(.4,0,.2,1);
+}
+.note-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(200,148,58,.25);
+}
+
+/* ━━━ ROWS & MICRO-INTERACTIONS ━━━━━━━━━━━━━━━━━━━━━ */
+.row, .t-row, .bdg-row {
+  position: relative;
+  transition: all .2s ease;
+}
+.row::before, .t-row::before, .bdg-row::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 2px; background: var(--gold);
+  transform: scaleY(0);
+  transition: transform .3s cubic-bezier(.4,0,.2,1);
+}
+.row:hover, .t-row:hover, .bdg-row:hover {
+  background: rgba(200,148,58,.03);
+  padding-left: 6px;
+  margin-left: -4px;
+}
+.row:hover::before, .t-row:hover::before, .bdg-row:hover::before {
+  transform: scaleY(1);
+}
+
+/* ━━━ INFO BOX ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.infobox .r {
+  transition: all .2s ease;
+}
+.infobox .r:hover {
+  transform: translateX(5px);
+  background: rgba(61,122,82,.05);
+  padding-left: 6px;
+  margin-left: -6px;
+  border-radius: 4px;
+}
+
+/* ━━━ SECTION HEADERS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.sec-h::after, .section-eyebrow::before {
+  animation: drawLine .7s cubic-bezier(.4,0,.2,1) both;
+}
+
+/* ━━━ HOTEL HEADERS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.hotel-header {
+  animation: fadeIn .5s cubic-bezier(.4,0,.2,1) both;
+}
+
+/* ━━━ PANE TRANSITIONS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.pane.on {
+  animation: paneFade .4s cubic-bezier(.4,0,.2,1);
+}
+@keyframes paneFade {
+  from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ━━━ ACCESSIBILITY — Reduced Motion ━━━━━━━━━━━━━━━━ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 </style>
@@ -892,7 +1741,7 @@ input[type=number] { -moz-appearance: textfield; }
       </div>
       <div class="hero-stat">
         <span class="hero-stat-icon">🏨</span>
-        <span class="hero-stat-text">5 nights <span class="hero-stat-sub">4 hotels</span></span>
+        <span class="hero-stat-text">5 nights <span class="hero-stat-sub">3 hotels</span></span>
       </div>
       <div class="hero-stat">
         <span class="hero-stat-icon">🚗</span>
@@ -970,9 +1819,9 @@ input[type=number] { -moz-appearance: textfield; }
     <div class="row"><span class="lbl">Day 1 · Apr 24</span><span class="val">Land Kochi · Lunch Fort Kochi · Cab to Munnar (130 km)</span></div>
     <div class="row"><span class="lbl">Day 2 · Apr 25</span><span class="val">Eravikulam NP · Mattupetty · Tea factory · Waterfalls · Top Station sunset</span></div>
     <div class="row"><span class="lbl">Day 3 · Apr 26</span><span class="val">Checkout Munnar · Drive Kumarakom (120 km) · Backwater cruise · Karimeen dinner</span></div>
-    <div class="row"><span class="lbl">Day 4 · Apr 27</span><span class="val">Checkout Kumarakom · Drive Varkala (130 km) · Cliff walk · Sunset · Dinner</span></div>
-    <div class="row"><span class="lbl">Day 5 · Apr 28</span><span class="val">Ayurveda (opt.) · Kovalam beach (55 km) · Trivandrum · Temple · Farewell dinner</span></div>
-    <div class="row"><span class="lbl">Day 6 · Apr 29</span><span class="val">Shanghumugham sunrise · Palace museum · TRV Airport · Fly home</span></div>
+    <div class="row"><span class="lbl">Day 4 · Apr 27</span><span class="val">Checkout Kumarakom · Varkala cliff lunch (1 hr) · Drive to Kovalam · Beach check-in</span></div>
+    <div class="row"><span class="lbl">Day 5 · Apr 28</span><span class="val">Poovar mangrove cruise · Kovalam beach · Trivandrum temple & market · Kerala Sadya</span></div>
+    <div class="row"><span class="lbl">Day 6 · Apr 29</span><span class="val">Checkout Kovalam · Direct to TRV Airport · Fly home</span></div>
   </div>
 
   <div class="note-box"><strong style="color:var(--ink)">Alleppey removed.</strong> Route simplified: Kumarakom backwaters give the same authentic experience without the detour. Saves half a day and reduces driving. Cleaner, more relaxed flow.</div>
@@ -994,10 +1843,8 @@ input[type=number] { -moz-appearance: textfield; }
     <div class="sec"><div class="sec-h">Schedule</div>
       <div class="t-row"><span class="t-time">8:00 AM</span><div><div class="t-text">Depart Chandigarh ✈</div><div class="t-note">~4 hr flight to Kochi</div></div></div>
       <div class="t-row"><span class="t-time">~12:00 PM</span><div><div class="t-text">Land Cochin Airport (COK)</div><div class="t-note">Pick up pre-booked outstation cab. Freshen up.</div></div></div>
-      <div class="t-row"><span class="t-time">1:00 PM</span><div><div class="t-text">Lunch · Fort Kochi</div><div class="t-note">Fish curry, appam. Quick stroll — Chinese Fishing Nets (Cheena Vala), colonial streets.</div></div></div>
       <div class="t-row"><span class="t-time">2:30 PM</span><div><div class="t-text">Depart for Munnar · 130 km</div><div class="t-note">Ghat road via Kothamangalam. Waterfalls visible from the road. ~4 hrs.</div><span class="bdg a">Cab · ₹2,000–3,200</span></div></div>
-      <div class="t-row"><span class="t-time">7:00 PM</span><div><div class="t-text">Arrive Munnar · Check-in</div><div class="t-note">Evening walk through Munnar bazaar — spices, local tea, handmade chocolates.</div></div></div>
-      <div class="t-row"><span class="t-time">8:00 PM</span><div><div class="t-text">Dinner · Rapsy Restaurant or hotel</div><div class="t-note">Kerala thali, puttu, kadala curry. Early rest — big day tomorrow.</div></div></div>
+      <div class="t-row"><span class="t-time">7:00 PM</span><div><div class="t-text">Arrive Munnar · Check-in Manoor Farms Stay</div><div class="t-note">Evening walk through Munnar bazaar — spices, local tea, handmade chocolates.</div></div></div>
     </div>
     <div class="sec"><div class="sec-h">Highlights</div><div style="font-size:12px;color:var(--color-text-secondary);line-height:1.7;font-weight:300">Scenic ghat descent through rubber tree forests · Fort Kochi colonial architecture · First Kerala meal · Cool Munnar mountain air (1600m altitude)</div></div>
     <div class="infobox">
@@ -1013,15 +1860,19 @@ input[type=number] { -moz-appearance: textfield; }
       <div><div class="day-title">Munnar Hills — Full Day</div><div class="day-date">Friday, Apr 25</div></div>
     </div>
     <div class="sec"><div class="sec-h">Schedule</div>
-      <div class="t-row"><span class="t-time">6:30 AM</span><div><div class="t-text">Eravikulam National Park</div><div class="t-note">Nilgiri Tahr mountain goat. Stunning high-altitude grasslands. Opens 7 AM. Book tickets online at eravikulam.org — sells out!</div><span class="bdg g">Must-do · Book ahead</span></div></div>
-      <div class="t-row"><span class="t-time">9:30 AM</span><div><div class="t-text">Mattupetty Dam + Echo Point</div><div class="t-note">Scenic reservoir surrounded by shola forest. Boating available. Echo Point 2 km ahead — shout and hear yourself back from the hills.</div></div></div>
-      <div class="t-row"><span class="t-time">11:00 AM</span><div><div class="t-text">Tea Garden Viewpoint + KDHP Factory</div><div class="t-note">Walk through endless emerald tea estates. Factory tour shows full leaf-to-cup process. Buy fresh tea directly from source.</div></div></div>
-      <div class="t-row"><span class="t-time">1:00 PM</span><div><div class="t-text">Lunch · Munnar town</div><div class="t-note">SN Restaurant or Crown Bakery. Browse spice shops, banana chips, handmade chocolate stalls.</div></div></div>
-      <div class="t-row"><span class="t-time">3:00 PM</span><div><div class="t-text">Attukal or Lakkam Waterfalls</div><div class="t-note">Tiered waterfalls through tea-covered hillsides. Refreshing and photogenic.</div></div></div>
-      <div class="t-row"><span class="t-time">5:30 PM</span><div><div class="t-text">Top Station sunset · 1700m</div><div class="t-note">Highest point in Munnar. Panoramic views of Tamil Nadu valleys. Misty clouds rolling in at sunset — unforgettable. 34 km from town, leave by 5 PM latest.</div><span class="bdg a">Sunset must</span></div></div>
-      <div class="t-row"><span class="t-time">8:00 PM</span><div><div class="t-text">Return hotel · Dinner</div><div class="t-note">Relax after the big hill day.</div></div></div>
+      <div class="t-row"><span class="t-time">9:30 AM</span><div><div class="t-text">Start the day · Breakfast at farm stay</div><div class="t-note">Relaxed start. Fresh farm breakfast before heading out.</div></div></div>
+      <div class="t-row"><span class="t-time">10:30 AM</span><div><div class="t-text">Sightseeing + Waterfalls (Gap Road)</div><div class="t-note">Drive along the famous Gap Road for valley views. Note: dry season — waterfalls may be reduced flow but still scenic.</div><span class="bdg a">Dry season</span></div></div>
+      <div class="t-row"><span class="t-time">11:00 AM</span><div><div class="t-text">Tea Gardens / Tea Fields</div><div class="t-note">Walk through endless emerald tea estates. Photo stops at viewpoints. Fresh tea aroma everywhere.</div></div></div>
+      <div class="t-row"><span class="t-time">11:45 AM</span><div><div class="t-text">Tea Museum + KDHP Factory</div><div class="t-note">Full leaf-to-cup process tour. History of Munnar tea industry. Tasting session at the end.</div></div></div>
+      <div class="t-row"><span class="t-time">12:00 PM</span><div><div class="t-text">Botanical Garden Munnar</div><div class="t-note">Curated collection of local flora, herbs, and orchids. Cool shaded walk.</div></div></div>
+      <div class="t-row"><span class="t-time">2:00 PM</span><div><div class="t-text">Sightseeing continues</div><div class="t-note">Lunch break and explore further viewpoints around Munnar.</div></div></div>
+      <div class="t-row"><span class="t-time">4:00 PM</span><div><div class="t-text">Ripple Tea Bazaar</div><div class="t-note">Browse and buy authentic Munnar tea, spices, homemade chocolates, and souvenirs.</div></div></div>
+      <div class="t-row"><span class="t-time">5:00 PM</span><div><div class="t-text">Main Munnar Market</div><div class="t-note">Local bazaar — banana chips, cardamom, pepper, handicrafts. Bargain-friendly.</div></div></div>
+      <div class="t-row"><span class="t-time">6:00 PM</span><div><div class="t-text">Sungulu Dam / Reservoir + Hydro Plants</div><div class="t-note">Scenic reservoir with hydroelectric infrastructure. Quiet evening views over the water.</div><span class="bdg b">Sunset spot</span></div></div>
+      <div class="t-row"><span class="t-time">7:00 PM</span><div><div class="t-text">Dinner</div><div class="t-note">Kerala thali, puttu, kadala curry. Local restaurant or farm stay.</div></div></div>
+      <div class="t-row"><span class="t-time">8:00 PM</span><div><div class="t-text">Back to Manoor Farms Stay</div><div class="t-note">Wind down. Cool mountain night — perfect for rest.</div></div></div>
     </div>
-    <div class="sec"><div class="sec-h">Highlights</div><div style="font-size:12px;color:var(--color-text-secondary);line-height:1.7;font-weight:300">Endangered mountain goat · Echo Point valley resonance · Fresh-picked tea · Waterfall trek · 360° sunset from 1700m</div></div>
+    <div class="sec"><div class="sec-h">Highlights</div><div style="font-size:12px;color:var(--color-text-secondary);line-height:1.7;font-weight:300">Gap Road valley views · Tea fields & museum tour · Botanical garden · Bazaar shopping · Sungulu Dam reservoir sunset</div></div>
     <div class="infobox">
       <div class="r"><span class="k">Stay</span><span class="v">Munnar · Night 2</span></div>
       <div class="r"><span class="k">Local travel</span><span class="v">~80 km sightseeing loop</span></div>
@@ -1035,83 +1886,90 @@ input[type=number] { -moz-appearance: textfield; }
       <div><div class="day-title">Munnar → Kumarakom Backwaters <span class="bdg t">Direct</span></div><div class="day-date">Saturday, Apr 26</div></div>
     </div>
     <div class="sec"><div class="sec-h">Schedule</div>
-      <div class="t-row"><span class="t-time">9:30 AM</span><div><div class="t-text">Checkout Munnar · Final bazaar stroll</div><div class="t-note">Last chance to buy local tea, spices, Munnar chocolates as gifts.</div></div></div>
-      <div class="t-row"><span class="t-time">10:00 AM</span><div><div class="t-text">Depart for Kumarakom · 120 km direct</div><div class="t-note">Via Kottayam. Scenic descent through rubber plantations and rice paddy fields. ~3 hrs.</div><span class="bdg a">Cab · ₹1,800–2,800</span></div></div>
-      <div class="t-row"><span class="t-time">1:00 PM</span><div><div class="t-text">Lunch · Kottayam town</div><div class="t-note">Duck curry (tharavu curry) or beef fry with appam — famous Kottayam Syrian Christian speciality. Ask for a local restaurant, not a hotel.</div></div></div>
-      <div class="t-row"><span class="t-time">2:30 PM</span><div><div class="t-text">Arrive Kumarakom · Check-in</div><div class="t-note">Resort or waterfront houseboat. Freshen up, change into light clothes.</div></div></div>
-      <div class="t-row"><span class="t-time">4:00 PM</span><div><div class="t-text">Backwater canal cruise</div><div class="t-note">Narrow village waterways through paddy fields and coconut groves. Spot kingfishers, egrets, otters. Far more authentic than touristy Alleppey routes.</div><span class="bdg b">Must-do</span></div></div>
-      <div class="t-row"><span class="t-time">6:00 PM</span><div><div class="t-text">Sunset over Vembanad Lake</div><div class="t-note">Watch fishermen cast nets silhouetted against the orange sky. Perfect photography.</div></div></div>
-      <div class="t-row"><span class="t-time">7:30 PM</span><div><div class="t-text">Dinner · Karimeen (pearl spot fish)</div><div class="t-note">Local delicacy of Kottayam backwaters. Served with rice, coconut curries. Often cooked tableside at waterfront resorts.</div></div></div>
+      <div class="t-row"><span class="t-time">9:00 AM</span><div><div class="t-text">Checkout Manoor Farms Stay · Leave for Whispering Palms</div><div class="t-note">Pack up and depart. Scenic descent through rubber plantations and rice paddy fields toward Kumarakom.</div><span class="bdg a">Cab · ₹1,800–2,800</span></div></div>
+      <div class="t-row"><span class="t-time">12:00 PM</span><div><div class="t-text">Brunch at RASA</div><div class="t-note">Mid-route brunch stop. Local Kerala cuisine — appam, stew, fish curry. Refuel for the rest of the journey.</div><span class="bdg g">Brunch stop</span></div></div>
+      <div class="t-row"><span class="t-time">2:00 PM</span><div><div class="t-text">Check-in · Abad Whispering Palms</div><div class="t-note">Lakeside resort on Vembanad. Request lake-facing room. Settle in.</div></div></div>
+      <div class="t-row"><span class="t-time">2:00–5:00 PM</span><div><div class="t-text">Rest & relax</div><div class="t-note">Pool time, hammock, lake views. Recharge after the morning drive.</div></div></div>
+      <div class="t-row"><span class="t-time">6:00 PM</span><div><div class="t-text">Sunset at Vembanad Lake</div><div class="t-note">Watch fishermen cast nets silhouetted against the orange sky. Perfect photography. Walk along the resort's lakefront.</div><span class="bdg b">Golden hour</span></div></div>
+      <div class="t-row"><span class="t-time">7:30 PM</span><div><div class="t-text">Pool-side coding 💻</div><div class="t-note">Wind down by the pool with laptop in hand. Tropical workspace vibes.</div><span class="bdg v">Chill time</span></div></div>
+      <div class="t-row"><span class="t-time">8:00 PM</span><div><div class="t-text">Dinner at resort</div><div class="t-note">Try Karimeen (pearl spot fish) — local delicacy of Kottayam backwaters. Served with rice and coconut curries.</div></div></div>
     </div>
-    <div class="sec"><div class="sec-h">Highlights</div><div style="font-size:12px;color:var(--color-text-secondary);line-height:1.7;font-weight:300">Hills-to-backwaters transition in one day · Village canal authenticity · Rare birds in natural habitat · Kerala's most famous fish dish</div></div>
+    <div class="sec"><div class="sec-h">Highlights</div><div style="font-size:12px;color:var(--color-text-secondary);line-height:1.7;font-weight:300">Brunch at RASA mid-route · Lakeside resort relaxation · Vembanad Lake sunset · Pool-side workspace · Karimeen fish dinner</div></div>
     <div class="infobox">
-      <div class="r"><span class="k">Stay</span><span class="v">Kumarakom · 1 night (Apr 26–27)</span></div>
-      <div class="r"><span class="k">Recommended</span><span class="v">Kumarakom Lake Resort · Coconut Lagoon · CGH Houseboats</span></div>
-      <div class="r"><span class="k">Travel today</span><span class="v">~120 km</span></div>
+      <div class="r"><span class="k">Stay</span><span class="v">Abad Whispering Palms · 1 night (Apr 26–27)</span></div>
+      <div class="r"><span class="k">Travel today</span><span class="v">~120 km (Munnar → Kumarakom)</span></div>
     </div>
   </div>
 
   <div class="card">
     <div class="day-header">
       <div class="day-num" style="background:linear-gradient(135deg,#fef3c7,#fcd34d);color:#78350f">4</div>
-      <div><div class="day-title">Kumarakom → Varkala Cliff</div><div class="day-date">Sunday, Apr 27</div></div>
+      <div><div class="day-title">Kumarakom → Kovalam (via Varkala)</div><div class="day-date">Sunday, Apr 27</div></div>
     </div>
     <div class="sec"><div class="sec-h">Schedule</div>
-      <div class="t-row"><span class="t-time">8:00 AM</span><div><div class="t-text">Checkout · Early breakfast at resort</div><div class="t-note">Enjoy final backwater view from the dining area. Pack up.</div></div></div>
-      <div class="t-row"><span class="t-time">8:30 AM</span><div><div class="t-text">Depart for Varkala · 130 km</div><div class="t-note">Coastal highway south through small towns. Plenty of coconut water stalls to stop at. ~3.5 hrs.</div><span class="bdg a">Cab · ₹2,500–4,000</span></div></div>
-      <div class="t-row"><span class="t-time">12:00 PM</span><div><div class="t-text">Arrive Varkala · Check-in cliff hotel</div><div class="t-note">Drop luggage. Get a cliff-view room if possible — worth every rupee.</div></div></div>
-      <div class="t-row"><span class="t-time">1:00 PM</span><div><div class="t-text">Lunch at cliff café</div><div class="t-note">Fish, pizza, Kerala curries all available. Eat with the Arabian Sea in view.</div></div></div>
-      <div class="t-row"><span class="t-time">3:00 PM</span><div><div class="t-text">Cliff walk + Papanasam Beach</div><div class="t-note">Walk narrow cliffside promenade. Browse handicrafts, yoga centres. Descend the stairs to the beach — red cliffs tower 30m above.</div></div></div>
-      <div class="t-row"><span class="t-time">5:00 PM</span><div><div class="t-text">Sunset from the cliff edge</div><div class="t-note">Arguably the best sunset view in Kerala. Arabian Sea goes pink and orange. Sit at a cliffside café with a drink and just watch.</div><span class="bdg a">Golden hour</span></div></div>
-      <div class="t-row"><span class="t-time">7:00 PM</span><div><div class="t-text">Cliff-edge dinner</div><div class="t-note">Try Café del Mar, Abba Restaurant, or Juice Shack. Fresh seafood, sound of waves below.</div></div></div>
+      <div class="t-row"><span class="t-time">6:30 AM</span><div><div class="t-text">Backwater canal ride</div><div class="t-note">Early morning shikara/canoe through narrow village waterways. Spot kingfishers, egrets, otters. Far more authentic than touristy Alleppey routes. ~3 hrs.</div><span class="bdg b">Must-do · Sunrise</span></div></div>
+      <div class="t-row"><span class="t-time">9:30 AM</span><div><div class="t-text">Back from boat tour</div><div class="t-note">Return to Abad Whispering Palms. Freshen up.</div></div></div>
+      <div class="t-row"><span class="t-time">10:00 AM</span><div><div class="t-text">Breakfast at resort</div><div class="t-note">Lakeside breakfast after the morning cruise.</div></div></div>
+      <div class="t-row"><span class="t-time">11:00 AM</span><div><div class="t-text">Checkout Abad Whispering Palms</div><div class="t-note">Pack up and prepare for the long drive south.</div></div></div>
+      <div class="t-row"><span class="t-time">11:30 AM</span><div><div class="t-text">Depart for Kovalam via Varkala · 160 km</div><div class="t-note">Coastal highway south. Varkala midpoint lunch stop. ~4 hrs driving total.</div><span class="bdg a">Cab · ₹3,800–4,500</span></div></div>
+      <div class="t-row"><span class="t-time">2:00 PM</span><div><div class="t-text">Varkala Cliff · Lunch stop</div><div class="t-note">Famous cliff-side café lunch with Arabian Sea views. Try Café del Mar, Darjeeling Café, or Juice Shack. Fresh seafood, clifftop ambiance. Budget ~1 hr max (excluding meal).</div><span class="bdg b">Scenic stop</span></div></div>
+      <div class="t-row"><span class="t-time">4:00 PM</span><div><div class="t-text">Continue to Kovalam · 30 km</div><div class="t-note">Short coastal drive south. ~40 min.</div></div></div>
+      <div class="t-row"><span class="t-time">5:00 PM</span><div><div class="t-text">Check-in Getaway Beach Resorts</div><div class="t-note">Beachfront resort. Request sea-facing room. Freshen up.</div></div></div>
+      <div class="t-row"><span class="t-time">6:00 PM</span><div><div class="t-text">Sunset from Lighthouse viewpoint</div><div class="t-note">Climb the red-and-white striped lighthouse for 360° coastal panorama. Arabian Sea sunset.</div><span class="bdg a">Golden hour</span></div></div>
+      <div class="t-row"><span class="t-time">8:00 PM</span><div><div class="t-text">Beachside dinner</div><div class="t-note">Fresh catch of the day at resort or beachfront shack. Relaxed first evening.</div></div></div>
     </div>
-    <div class="sec"><div class="sec-h">Highlights</div><div style="font-size:12px;color:var(--color-text-secondary);line-height:1.7;font-weight:300">Kerala's only cliff beach · 30m red sedimentary cliffs · Sacred Papanasam beach · Clifftop café culture · Best sunset on the trip</div></div>
+    <div class="sec"><div class="sec-h">Highlights</div><div style="font-size:12px;color:var(--color-text-secondary);line-height:1.7;font-weight:300">Sunrise backwater canal ride · Varkala cliff lunch en route · Kovalam's three crescent beaches · Lighthouse sunset panorama</div></div>
     <div class="infobox">
-      <div class="r"><span class="k">Stay</span><span class="v">Varkala · 1 night (Apr 27–28)</span></div>
-      <div class="r"><span class="k">Recommended</span><span class="v">Clafouti Beach Resort · Sea Splendour · Zostel Varkala</span></div>
-      <div class="r"><span class="k">Travel today</span><span class="v">~130 km</span></div>
+      <div class="r"><span class="k">Stay</span><span class="v">Getaway Beach Resorts, Kovalam · Night 1 of 2 (Apr 27–29)</span></div>
+      <div class="r"><span class="k">Travel today</span><span class="v">~160 km (Kumarakom → Varkala → Kovalam)</span></div>
+      <div class="r"><span class="k">Varkala</span><span class="v">Lunch stop only · ~1 hr cliff time + meal</span></div>
     </div>
   </div>
 
   <div class="card">
     <div class="day-header">
       <div class="day-num" style="background:linear-gradient(135deg,#fce7f3,#f9a8d4);color:#831843">5</div>
-      <div><div class="day-title">Varkala → Kovalam → Trivandrum</div><div class="day-date">Monday, Apr 28</div></div>
+      <div><div class="day-title">Kovalam + Poovar + Trivandrum</div><div class="day-date">Monday, Apr 28</div></div>
     </div>
     <div class="sec"><div class="sec-h">Schedule</div>
-      <div class="t-row"><span class="t-time">9:00 AM</span><div><div class="t-text">Optional: Ayurveda massage · Varkala</div><div class="t-note">90-min traditional Kerala oil massage at cliff centre. ₹1,200–2,500. Book night before.</div><span class="bdg g">Optional</span></div></div>
-      <div class="t-row"><span class="t-time">11:00 AM</span><div><div class="t-text">Checkout · Depart for Kovalam · 55 km</div><div class="t-note">Smooth coastal drive south. ~1.5 hrs.</div><span class="bdg a">Cab · ₹1,200–2,000</span></div></div>
-      <div class="t-row"><span class="t-time">12:30 PM</span><div><div class="t-text">Kovalam Lighthouse Beach</div><div class="t-note">Three crescent bays. Swim or sunbathe. Climb the lighthouse for 360° views. Headland rocks great for photography.</div></div></div>
-      <div class="t-row"><span class="t-time">2:00 PM</span><div><div class="t-text">Lunch · Kovalam beachside</div><div class="t-note">Prawn masala, fish fry, fresh coconut. Eat at a shack on the sand.</div></div></div>
-      <div class="t-row"><span class="t-time">3:30 PM</span><div><div class="t-text">Drive Trivandrum · 16 km · 25 min</div><div class="t-note">Check into hotel near airport.</div></div></div>
-      <div class="t-row"><span class="t-time">5:30 PM</span><div><div class="t-text">Padmanabhaswamy Temple</div><div class="t-note">One of India's wealthiest, most sacred temples. Dravidian architecture, 100-ft gopuram. Hindus only · Dhoti required for men.</div><span class="bdg p">Heritage</span></div></div>
-      <div class="t-row"><span class="t-time">6:30 PM</span><div><div class="t-text">East Fort market walk + Padmatheertha Pond</div><div class="t-note">Shop for kasavu fabric, moirakari metalwork, local handicrafts. Watch temple gopuram reflect in the pond at dusk.</div></div></div>
-      <div class="t-row"><span class="t-time">8:00 PM</span><div><div class="t-text">Farewell dinner · Kerala Sadya</div><div class="t-note">Classic vegetarian feast on banana leaf — 20+ dishes. Villa Maya heritage bungalow or Malabar Hotel.</div><span class="bdg g">Special</span></div></div>
+      <div class="t-row"><span class="t-time">8:00 AM</span><div><div class="t-text">Breakfast at resort</div><div class="t-note">No checkout — staying second night. Relaxed morning.</div></div></div>
+      <div class="t-row"><span class="t-time">9:00 AM</span><div><div class="t-text">Depart for Poovar Island · 15 km south</div><div class="t-note">Short drive to Poovar backwaters. ~20 min.</div><span class="bdg a">Cab · Round trip</span></div></div>
+      <div class="t-row"><span class="t-time">9:30 AM</span><div><div class="t-text">Poovar Island mangrove cruise</div><div class="t-note">Motorboat through narrow mangrove channels where backwaters meet the sea. Golden sands, floating bridge, estuary wildlife. 1.5–2 hrs. Book in advance.</div><span class="bdg t">Must-do · Mangroves</span></div></div>
+      <div class="t-row"><span class="t-time">12:00 PM</span><div><div class="t-text">Return to Kovalam · Beach time</div><div class="t-note">Swim, sunbathe, or optional Ayurveda massage at resort spa.</div><span class="bdg g">Optional spa</span></div></div>
+      <div class="t-row"><span class="t-time">2:00 PM</span><div><div class="t-text">Lunch at resort or beachside</div><div class="t-note">Fresh seafood, Kerala curries. Relax post-lunch.</div></div></div>
+      <div class="t-row"><span class="t-time">4:00 PM</span><div><div class="t-text">Drive to Trivandrum · 16 km north</div><div class="t-note">City sightseeing afternoon. ~25 min drive.</div></div></div>
+      <div class="t-row"><span class="t-time">4:45 PM</span><div><div class="t-text">Padmanabhaswamy Temple</div><div class="t-note">One of India's wealthiest, most sacred temples. Dravidian architecture, 100-ft gopuram. Hindus only · Dhoti required for men · Saree/churidar for women.</div><span class="bdg p">Heritage</span></div></div>
+      <div class="t-row"><span class="t-time">6:00 PM</span><div><div class="t-text">East Fort market + Padmatheertha Pond</div><div class="t-note">Shop for kasavu fabric, moirakari metalwork, local handicrafts. Watch temple gopuram reflect in the pond at dusk.</div></div></div>
+      <div class="t-row"><span class="t-time">7:30 PM</span><div><div class="t-text">Return to Kovalam · 16 km</div><div class="t-note">Back to resort for evening.</div></div></div>
+      <div class="t-row"><span class="t-time">8:30 PM</span><div><div class="t-text">Farewell dinner · Kerala Sadya</div><div class="t-note">Classic vegetarian feast on banana leaf — 20+ dishes. Available at resort or nearby Villa Maya, Malabar Hotel in city (arrange transport).</div><span class="bdg g">Special</span></div></div>
     </div>
+    <div class="sec"><div class="sec-h">Highlights</div><div style="font-size:12px;color:var(--color-text-secondary);line-height:1.7;font-weight:300">Poovar mangrove backwaters · Where river meets sea · Sacred Padmanabhaswamy Temple · Traditional market shopping · Kerala Sadya farewell feast</div></div>
     <div class="infobox">
-      <div class="r"><span class="k">Stay</span><span class="v">Trivandrum · 1 night (Apr 28–29)</span></div>
-      <div class="r"><span class="k">Recommended</span><span class="v">Uday Samudra · Muthoot Plaza · Villa Maya</span></div>
-      <div class="r"><span class="k">Travel today</span><span class="v">~70 km total</span></div>
+      <div class="r"><span class="k">Stay</span><span class="v">Getaway Beach Resorts, Kovalam · Night 2 of 2 (Apr 28–29)</span></div>
+      <div class="r"><span class="k">Activities</span><span class="v">Poovar cruise · Trivandrum temple & market</span></div>
+      <div class="r"><span class="k">Total distance</span><span class="v">~60 km (round trips from Kovalam)</span></div>
+      <div class="r"><span class="k">Poovar booking</span><span class="v">Book mangrove cruise in advance — popular activity</span></div>
     </div>
   </div>
 
   <div class="card">
     <div class="day-header">
       <div class="day-num" style="background:linear-gradient(135deg,#ede9fe,#c4b5fd);color:#4c1d95">6</div>
-      <div><div class="day-title">Departure · Trivandrum → TRV ✈</div><div class="day-date">Tuesday, Apr 29</div></div>
+      <div><div class="day-title">Departure · Kovalam → TRV ✈</div><div class="day-date">Tuesday, Apr 29</div></div>
     </div>
     <div class="sec"><div class="sec-h">Schedule</div>
-      <div class="t-row"><span class="t-time">7:00 AM</span><div><div class="t-text">Shanghumugham Beach · Sunrise walk</div><div class="t-note">Trivandrum's calmest beach. 6 km from city. Giant mermaid sculpture. Perfect peaceful farewell to Kerala.</div><span class="bdg b">Hidden gem</span></div></div>
-      <div class="t-row"><span class="t-time">8:30 AM</span><div><div class="t-text">Hotel breakfast + checkout</div><div class="t-note">Pack up. Last Kerala chai.</div></div></div>
-      <div class="t-row"><span class="t-time">9:00 AM</span><div><div class="t-text">Kuthiramalika Palace Museum</div><div class="t-note">18th-century royal palace. Intricate woodcarvings, Kathakali masks, royal artefacts. Opens 8:30 AM. 45 min.</div></div></div>
-      <div class="t-row"><span class="t-time">10:00 AM</span><div><div class="t-text">Final souvenir shopping</div><div class="t-note">Last-minute gifts, tea boxes, Kerala coffee, moirakari items.</div></div></div>
-      <div class="t-row"><span class="t-time">10:30 AM</span><div><div class="t-text">Depart for TRV Airport · 6 km</div><div class="t-note">15–20 min drive. Arrive 2–3 hrs before flight. Airport is compact and efficient.</div><span class="bdg a">Cab · ₹400–900</span></div></div>
-      <div class="t-row"><span class="t-time">Afternoon</span><div><div class="t-text">Depart Trivandrum ✈ → Chandigarh</div><div class="t-note">Fly home. Kerala done.</div></div></div>
+      <div class="t-row"><span class="t-time">7:00 AM</span><div><div class="t-text">Optional: Sunrise beach walk</div><div class="t-note">Early morning stroll on Lighthouse Beach. Peaceful farewell to Kerala coast.</div><span class="bdg b">Optional</span></div></div>
+      <div class="t-row"><span class="t-time">8:00 AM</span><div><div class="t-text">Breakfast at resort</div><div class="t-note">Final Kerala meal. Pack up.</div></div></div>
+      <div class="t-row"><span class="t-time">10:00 AM</span><div><div class="t-text">Checkout Getaway Beach Resorts</div><div class="t-note">Depart for airport. Luggage in cab.</div></div></div>
+      <div class="t-row"><span class="t-time">10:30 AM</span><div><div class="t-text">Depart for TRV Airport · 16 km</div><div class="t-note">Direct coastal route. ~25–30 min. Arrive 2–3 hrs before flight.</div><span class="bdg a">Cab · ₹800–1,000</span></div></div>
+      <div class="t-row"><span class="t-time">11:00 AM</span><div><div class="t-text">Arrive Trivandrum International Airport</div><div class="t-note">Compact, efficient airport. Check-in and security.</div></div></div>
+      <div class="t-row"><span class="t-time">Afternoon</span><div><div class="t-text">Depart Trivandrum ✈ → Chandigarh</div><div class="t-note">Flight home. Kerala journey complete.</div></div></div>
     </div>
+    <div class="sec"><div class="sec-h">Highlights</div><div style="font-size:12px;color:var(--color-text-secondary);line-height:1.7;font-weight:300">Final morning at Kovalam beach · Direct departure from resort · Smooth airport transfer</div></div>
     <div class="infobox">
-      <div class="r"><span class="k">Checkout</span><span class="v">Trivandrum hotel · 10:00 AM</span></div>
-      <div class="r"><span class="k">Airport</span><span class="v">TRV · 6 km from city · 20 min</span></div>
-      <div class="r"><span class="k">Travel today</span><span class="v">~20 km city + airport</span></div>
+      <div class="r"><span class="k">Checkout</span><span class="v">Getaway Beach Resorts, Kovalam · 10:00 AM</span></div>
+      <div class="r"><span class="k">Airport</span><span class="v">TRV · 16 km from Kovalam · 25–30 min</span></div>
+      <div class="r"><span class="k">Travel today</span><span class="v">~16 km resort → airport</span></div>
     </div>
   </div>
 
@@ -1123,19 +1981,18 @@ input[type=number] { -moz-appearance: textfield; }
 ═══════════════════════════════════════════════════════ -->
 <div id="hotels" class="pane">
 <div class="pane-inner">
-  <div class="note-box" style="margin-bottom:14px"><strong style="color:var(--ink)">5 nights · 4 hotels</strong> — Munnar 2 nights, Kumarakom 1, Varkala 1, Trivandrum 1</div>
+  <div class="note-box" style="margin-bottom:14px"><strong style="color:var(--ink)">5 nights · 3 hotels</strong> — Munnar 2 nights (Manoor Farms Stay), Kumarakom 1 night (Abad Whispering Palms), Kovalam 2 nights (Getaway Beach Resorts)</div>
 
   <div class="card">
     <div class="hotel-header">
-      <div><div class="hotel-name">Hotel · Munnar</div><div class="hotel-loc">Munnar town, Kerala · 1600m altitude</div></div>
-      <span class="bdg g">Stop 1</span>
+      <div><div class="hotel-name">Manoor Farms Stay · Munnar</div><div class="hotel-loc">Munnar, Kerala · 1600m altitude</div></div>
+      <span class="bdg g">Stop 1 · Confirmed</span>
     </div>
     <div class="row"><span class="lbl">Check-in</span><span class="val">Thu, Apr 24 · ~7:00 PM</span></div>
     <div class="row"><span class="lbl">Check-out</span><span class="val">Sat, Apr 26 · ~9:30 AM</span></div>
     <div class="row"><span class="lbl">Nights</span><span class="val">2 (Apr 24–26)</span></div>
-    <div class="row"><span class="lbl">Est. cost</span><span class="val">₹2,500–4,500/night</span></div>
-    <div class="row"><span class="lbl">Options</span><span class="val">Eastend Munnar (budget) · Blackberry Hills (mid) · Spice Tree (luxury)</span></div>
-    <div class="row"><span class="lbl">Tip</span><span class="val">Book with hill or valley view. AC optional — nights are cool. Ask for hot water confirmation.</span></div>
+    <div class="row"><span class="lbl">Type</span><span class="val">Farm stay accommodation with hill views</span></div>
+    <div class="row"><span class="lbl">Tip</span><span class="val">Authentic Kerala farm experience. Perfect for cool Munnar nights. Ask about farm tours.</span></div>
     <div class="infobox">
       <div class="r"><span class="k">Arriving from</span><span class="v">Kochi Airport · ~130 km</span></div>
       <div class="r"><span class="k">Departing to</span><span class="v">Kumarakom · ~120 km</span></div>
@@ -1144,52 +2001,35 @@ input[type=number] { -moz-appearance: textfield; }
 
   <div class="card">
     <div class="hotel-header">
-      <div><div class="hotel-name">Resort / Houseboat · Kumarakom</div><div class="hotel-loc">Vembanad Lake, Kottayam district</div></div>
-      <span class="bdg t">Stop 2 · Updated</span>
+      <div><div class="hotel-name">Abad Whispering Palms · Kumarakom</div><div class="hotel-loc">Vembanad Lake, Kumarakom</div></div>
+      <span class="bdg t">Stop 2 · Confirmed</span>
     </div>
     <div class="row"><span class="lbl">Check-in</span><span class="val">Sat, Apr 26 · ~2:30 PM</span></div>
     <div class="row"><span class="lbl">Check-out</span><span class="val">Sun, Apr 27 · ~8:00 AM</span></div>
     <div class="row"><span class="lbl">Nights</span><span class="val">1 (Apr 26–27)</span></div>
-    <div class="row"><span class="lbl">Est. cost</span><span class="val">₹2,000–6,000/night</span></div>
-    <div class="row"><span class="lbl">Options</span><span class="val">Kumarakom Lake Resort · Coconut Lagoon (heritage) · CGH Houseboats (overnight boat)</span></div>
-    <div class="row"><span class="lbl">Tip</span><span class="val">Waterfront room or overnight houseboat — both iconic. Houseboat gives total backwater immersion.</span></div>
+    <div class="row"><span class="lbl">Type</span><span class="val">Lakeside resort with backwater access</span></div>
+    <div class="row"><span class="lbl">Tip</span><span class="val">Request a lake-facing room. Perfect base for backwater cruise and Vembanad sunset views.</span></div>
     <div class="infobox">
       <div class="r"><span class="k">Arriving from</span><span class="v">Munnar · ~120 km</span></div>
-      <div class="r"><span class="k">Departing to</span><span class="v">Varkala · ~130 km</span></div>
+      <div class="r"><span class="k">Departing to</span><span class="v">Kovalam (via Varkala lunch stop) · ~160 km</span></div>
     </div>
   </div>
 
   <div class="card">
     <div class="hotel-header">
-      <div><div class="hotel-name">Cliff Hotel · Varkala</div><div class="hotel-loc">North Cliff, Varkala · Thiruvananthapuram district</div></div>
-      <span class="bdg a">Stop 3</span>
+      <div><div class="hotel-name">Getaway Beach Resorts · Kovalam</div><div class="hotel-loc">Kovalam Beach, Thiruvananthapuram</div></div>
+      <span class="bdg a">Stop 3 · Confirmed</span>
     </div>
-    <div class="row"><span class="lbl">Check-in</span><span class="val">Sun, Apr 27 · ~12:00 PM</span></div>
-    <div class="row"><span class="lbl">Check-out</span><span class="val">Mon, Apr 28 · ~9:00 AM</span></div>
-    <div class="row"><span class="lbl">Nights</span><span class="val">1 (Apr 27–28)</span></div>
-    <div class="row"><span class="lbl">Est. cost</span><span class="val">₹1,500–4,000/night</span></div>
-    <div class="row"><span class="lbl">Options</span><span class="val">Clafouti Beach Resort · Sea Splendour · Zostel Varkala (budget/social)</span></div>
-    <div class="row"><span class="lbl">Tip</span><span class="val">MUST stay on the cliff itself. Sea-facing rooms at all budgets. The atmosphere after dark is worth it.</span></div>
-    <div class="infobox">
-      <div class="r"><span class="k">Arriving from</span><span class="v">Kumarakom · ~130 km</span></div>
-      <div class="r"><span class="k">Departing to</span><span class="v">Kovalam → Trivandrum · ~70 km</span></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="hotel-header">
-      <div><div class="hotel-name">Hotel · Trivandrum</div><div class="hotel-loc">Near airport / Kovalam road, Thiruvananthapuram</div></div>
-      <span class="bdg v">Stop 4</span>
-    </div>
-    <div class="row"><span class="lbl">Check-in</span><span class="val">Mon, Apr 28 · ~4:30 PM</span></div>
+    <div class="row"><span class="lbl">Check-in</span><span class="val">Sun, Apr 27 · ~3:00 PM</span></div>
     <div class="row"><span class="lbl">Check-out</span><span class="val">Tue, Apr 29 · ~10:00 AM</span></div>
-    <div class="row"><span class="lbl">Nights</span><span class="val">1 (Apr 28–29)</span></div>
-    <div class="row"><span class="lbl">Est. cost</span><span class="val">₹2,000–4,000/night</span></div>
-    <div class="row"><span class="lbl">Options</span><span class="val">Uday Samudra (beachside) · Muthoot Plaza (city) · Villa Maya (heritage, fine dining)</span></div>
-    <div class="row"><span class="lbl">Tip</span><span class="val">Stay near airport — TRV is only 6 km from city centre. Easiest departure morning.</span></div>
+    <div class="row"><span class="lbl">Nights</span><span class="val">2 (Apr 27–29)</span></div>
+    <div class="row"><span class="lbl">Type</span><span class="val">Beachfront resort near Lighthouse Beach</span></div>
+    <div class="row"><span class="lbl">Activities</span><span class="val">Poovar Island mangrove cruise nearby · Beach access · Ayurveda spa</span></div>
+    <div class="row"><span class="lbl">Tip</span><span class="val">Book mangrove cruise for Day 5. Perfect base for Kovalam beach, Trivandrum temple & city exploration.</span></div>
     <div class="infobox">
-      <div class="r"><span class="k">Arriving from</span><span class="v">Kovalam · ~16 km</span></div>
-      <div class="r"><span class="k">Flight next morning</span><span class="v">TRV · Apr 29</span></div>
+      <div class="r"><span class="k">Arriving from</span><span class="v">Kumarakom via Varkala (lunch stop) · ~160 km</span></div>
+      <div class="r"><span class="k">Departing to</span><span class="v">TRV Airport · ~16 km</span></div>
+      <div class="r"><span class="k">Note</span><span class="v">2-night stay allows relaxed beach time + Trivandrum sightseeing</span></div>
     </div>
   </div>
 </div>
@@ -1232,33 +2072,34 @@ input[type=number] { -moz-appearance: textfield; }
     <div class="row"><span class="lbl">Lunch stop</span><span class="val">Kottayam town (~1 hr break)</span></div>
   </div>
 
-  <div class="card"><div class="card-title">Day 4 · Apr 27 — Kumarakom → Varkala</div>
-    <div class="row"><span class="lbl">Route</span><span class="val">Kumarakom → Karunagappally → Varkala (coastal highway)</span></div>
-    <div class="row"><span class="lbl">Distance</span><span class="val">~130 km</span></div>
-    <div class="row"><span class="lbl">Duration</span><span class="val">~3.5 hours</span></div>
-    <div class="row"><span class="lbl">Road type</span><span class="val">National highway, mostly flat and smooth</span></div>
-    <div class="row"><span class="lbl">Sedan fare</span><span class="val">₹2,500–3,000</span></div>
-    <div class="row"><span class="lbl">Innova fare</span><span class="val">₹3,200–4,000</span></div>
-    <div class="row"><span class="lbl">Highlights</span><span class="val">Coastal views, fishing villages, Arabian Sea glimpses</span></div>
+  <div class="card"><div class="card-title">Day 4 · Apr 27 — Kumarakom → Kovalam (via Varkala)</div>
+    <div class="row"><span class="lbl">Route</span><span class="val">Kumarakom → Varkala (lunch stop) → Kovalam</span></div>
+    <div class="row"><span class="lbl">Distance</span><span class="val">~160 km total</span></div>
+    <div class="row"><span class="lbl">Duration</span><span class="val">~4 hours driving + 1 hr Varkala stop</span></div>
+    <div class="row"><span class="lbl">Road type</span><span class="val">Coastal highway, smooth</span></div>
+    <div class="row"><span class="lbl">Varkala stop</span><span class="val">Famous cliff-side café lunch · 1 hr max (excluding meal time)</span></div>
+    <div class="row"><span class="lbl">Sedan fare</span><span class="val">₹3,000–3,500</span></div>
+    <div class="row"><span class="lbl">Innova fare</span><span class="val">₹3,800–4,500</span></div>
+    <div class="row"><span class="lbl">Highlights</span><span class="val">Varkala cliff views · Arabian Sea lunch · Coastal drive to Kovalam</span></div>
   </div>
 
-  <div class="card"><div class="card-title">Day 5 · Apr 28 — Varkala → Kovalam → Trivandrum</div>
-    <div class="row"><span class="lbl">Route</span><span class="val">Varkala → Kovalam (55 km) → Trivandrum (16 km)</span></div>
-    <div class="row"><span class="lbl">Distance</span><span class="val">~70 km total</span></div>
-    <div class="row"><span class="lbl">Duration</span><span class="val">~2 hours driving (split across the day)</span></div>
-    <div class="row"><span class="lbl">Road type</span><span class="val">Coastal road, smooth, easy driving</span></div>
-    <div class="row"><span class="lbl">Sedan fare</span><span class="val">₹1,200–1,500</span></div>
-    <div class="row"><span class="lbl">Innova fare</span><span class="val">₹1,500–2,000</span></div>
-    <div class="row"><span class="lbl">Note</span><span class="val">Short legs — most relaxed travel day of the trip</span></div>
+  <div class="card"><div class="card-title">Day 5 · Apr 28 — Kovalam + Poovar + Trivandrum</div>
+    <div class="row"><span class="lbl">Base</span><span class="val">Stay at Kovalam (no checkout)</span></div>
+    <div class="row"><span class="lbl">Morning</span><span class="val">Poovar Island mangrove cruise (~15 km from Kovalam)</span></div>
+    <div class="row"><span class="lbl">Afternoon</span><span class="val">Trivandrum city sightseeing (~16 km from Kovalam)</span></div>
+    <div class="row"><span class="lbl">Total distance</span><span class="val">~60 km round trips</span></div>
+    <div class="row"><span class="lbl">Activities</span><span class="val">Mangrove backwaters · Padmanabhaswamy Temple · Market · Kerala Sadya dinner</span></div>
+    <div class="row"><span class="lbl">Note</span><span class="val">Second night at Kovalam resort — relaxed day with nature + culture</span></div>
   </div>
 
-  <div class="card"><div class="card-title">Day 6 · Apr 29 — Trivandrum City → TRV Airport</div>
-    <div class="row"><span class="lbl">Route</span><span class="val">Shanghumugham Beach → Kuthiramalika Palace → TRV Airport</span></div>
-    <div class="row"><span class="lbl">Distance</span><span class="val">~20 km total city</span></div>
-    <div class="row"><span class="lbl">Airport dist.</span><span class="val">6 km from city centre · 15–20 min</span></div>
-    <div class="row"><span class="lbl">Sedan fare</span><span class="val">₹400–600</span></div>
-    <div class="row"><span class="lbl">Innova fare</span><span class="val">₹600–900</span></div>
-    <div class="row"><span class="lbl">Note</span><span class="val">Final fare includes drop at airport — confirm with driver the night before</span></div>
+  <div class="card"><div class="card-title">Day 6 · Apr 29 — Kovalam → TRV Airport</div>
+    <div class="row"><span class="lbl">Route</span><span class="val">Getaway Beach Resorts Kovalam → TRV Airport</span></div>
+    <div class="row"><span class="lbl">Distance</span><span class="val">~16 km</span></div>
+    <div class="row"><span class="lbl">Duration</span><span class="val">25–30 min</span></div>
+    <div class="row"><span class="lbl">Checkout</span><span class="val">10:00 AM from Kovalam</span></div>
+    <div class="row"><span class="lbl">Sedan fare</span><span class="val">₹600–800</span></div>
+    <div class="row"><span class="lbl">Innova fare</span><span class="val">₹800–1,000</span></div>
+    <div class="row"><span class="lbl">Note</span><span class="val">Direct to airport from Kovalam — arrive 2-3 hrs before flight</span></div>
   </div>
 
   <div class="km-total">
@@ -1409,14 +2250,31 @@ input[type=number] { -moz-appearance: textfield; }
 </div><!-- /page -->
 
 <script>
+// ═══════════════════════════════════════════════════════
+//  TAB SWITCHING
+// ═══════════════════════════════════════════════════════
 function sw(id, el) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
   document.querySelectorAll('.pane').forEach(p => p.classList.remove('on'));
   document.getElementById(id).classList.add('on');
   el.classList.add('on');
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  
+  // Re-trigger animations on tab switch
+  setTimeout(() => {
+    const pane = document.getElementById(id);
+    pane.querySelectorAll('.card, .stat, .tl-item, .exp-c, .total-box, .note-box').forEach((elem, i) => {
+      elem.style.animation = 'none';
+      setTimeout(() => {
+        elem.style.animation = '';
+      }, 10);
+    });
+  }, 50);
 }
 
+// ═══════════════════════════════════════════════════════
+//  EXPENSE CALCULATOR
+// ═══════════════════════════════════════════════════════
 function fmt(n) {
   return '₹' + Math.round(n).toLocaleString('en-IN');
 }
@@ -1462,9 +2320,134 @@ function calc() {
   document.getElementById('b_merch').textContent   = fmt(merch * pax);
   document.getElementById('b_misc').textContent    = fmt(misc * pax);
   document.getElementById('b_grand').textContent   = fmt(grandTotal);
+  
+  // Trigger number pop animation on update
+  document.querySelectorAll('.total-num .n, .grand-total-row .v').forEach(num => {
+    num.style.animation = 'none';
+    setTimeout(() => {
+      num.style.animation = 'numberPop .5s cubic-bezier(.4,0,.2,1)';
+    }, 10);
+  });
 }
 
 calc();
+
+// ═══════════════════════════════════════════════════════
+//  SCROLL REVEAL (Intersection Observer)
+// ═══════════════════════════════════════════════════════
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, observerOptions);
+
+// Mark cards as scroll-fade and observe them
+document.addEventListener('DOMContentLoaded', () => {
+  // Add scroll reveal to cards in longer sections
+  const cardsToReveal = document.querySelectorAll('.pane:not(#overview) .card');
+  cardsToReveal.forEach(card => {
+    card.classList.add('scroll-fade');
+    observer.observe(card);
+  });
+});
+
+// ═══════════════════════════════════════════════════════
+//  HERO SCROLLS NATURALLY (parallax removed)
+// ═══════════════════════════════════════════════════════
+
+// ═══════════════════════════════════════════════════════
+//  NAVBAR BACKGROUND ON SCROLL
+// ═══════════════════════════════════════════════════════
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('.nav-bar');
+  if (window.pageYOffset > 100) {
+    nav.style.background = 'rgba(245,240,232,.98)';
+    nav.style.boxShadow = '0 2px 12px rgba(0,0,0,.08)';
+  } else {
+    nav.style.background = 'rgba(245,240,232,.94)';
+    nav.style.boxShadow = '0 1px 0 rgba(200,148,58,.08)';
+  }
+});
+
+// ═══════════════════════════════════════════════════════
+//  TIMELINE DOT COLOR PULSE ON SCROLL INTO VIEW
+// ═══════════════════════════════════════════════════════
+const timelineDots = document.querySelectorAll('.tl-dot');
+const dotObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.animation = 'dotPulse .6s cubic-bezier(.4,0,.2,1)';
+      setTimeout(() => {
+        entry.target.style.animation = '';
+      }, 600);
+    }
+  });
+}, { threshold: 0.5 });
+
+timelineDots.forEach(dot => dotObserver.observe(dot));
+
+// ═══════════════════════════════════════════════════════
+//  EASTER EGG: Click hero title for confetti burst
+// ═══════════════════════════════════════════════════════
+let clickCount = 0;
+document.querySelector('.hero h1')?.addEventListener('click', () => {
+  clickCount++;
+  if (clickCount === 3) {
+    createConfetti();
+    clickCount = 0;
+  }
+});
+
+function createConfetti() {
+  const colors = ['#c8943a', '#e8b96a', '#27a96c', '#1a8fd1', '#e05c3a'];
+  for (let i = 0; i < 50; i++) {
+    const confetti = document.createElement('div');
+    confetti.style.position = 'fixed';
+    confetti.style.width = '8px';
+    confetti.style.height = '8px';
+    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    confetti.style.left = Math.random() * 100 + 'vw';
+    confetti.style.top = '-10px';
+    confetti.style.borderRadius = '50%';
+    confetti.style.pointerEvents = 'none';
+    confetti.style.zIndex = '9999';
+    confetti.style.animation = `confettiFall ${1 + Math.random() * 2}s linear forwards`;
+    document.body.appendChild(confetti);
+    setTimeout(() => confetti.remove(), 3000);
+  }
+}
+
+// Confetti animation
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes confettiFall {
+    to {
+      transform: translateY(100vh) rotate(${Math.random() * 360}deg);
+      opacity: 0;
+    }
+  }
+`;
+document.head.appendChild(style);
+
+// ═══════════════════════════════════════════════════════
+//  SMOOTH TRANSITIONS
+// ═══════════════════════════════════════════════════════
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
 </script>
 </body>
 </html>
